@@ -2030,6 +2030,7 @@
     ];
     const adminProfile = "Administraci\u00f3n - UTP";
     const adminPassword = "unesco";
+    const gradebookPassword = "violetit4";
     const pieColors = ["#1f4e79", "#5b9bd5", "#70ad47", "#f4d76f", "#ed7d31", "#a5a5a5", "#8064a2", "#c0504d"];
     const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     const monthOptions = monthNames.map((name, index) => ({ label: `${name} 2026`, month: index + 1, year: 2026 }));
@@ -3338,6 +3339,11 @@
     }
 
     function openGradesModule() {
+      const password = prompt("M\u00f3dulo en versi\u00f3n beta. Ingresa la contrase\u00f1a para acceder al registro de notas.");
+      if (password !== gradebookPassword) {
+        alert("Contrase\u00f1a incorrecta. No se abrir\u00e1 el registro de notas.");
+        return;
+      }
       moduleChooserView.classList.add("hidden");
       appView.classList.add("hidden");
       activityView.classList.add("hidden");
