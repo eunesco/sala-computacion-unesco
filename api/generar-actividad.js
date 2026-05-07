@@ -31,9 +31,6 @@ Reglas:
 - La rúbrica debe ir separada y tener al menos 4 criterios con 3 niveles.
 - Usa HTML simple en los campos largos: p, ul, ol, li, table, tr, th, td, strong.
 - No incluyas markdown ni texto fuera del JSON.
-- No puedes generar la misma actividad para el objetivo al presionar inmediatamente generar en ese mismo objetivo.
-- Las actividades no pueden usar un proyector o data, pues la sala de computación aún no tiene.
-- No debes tratar al profesor ni por su nombre ni por su apellido.
 
 Devuelve SOLO un JSON válido con esta forma:
 {

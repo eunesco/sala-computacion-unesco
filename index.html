@@ -385,6 +385,320 @@
       font-weight: 800;
     }
 
+    .module-home {
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr;
+      background: var(--soft);
+    }
+
+    .module-main {
+      padding: 24px 28px 34px;
+      display: grid;
+      gap: 18px;
+      align-content: start;
+    }
+
+    .module-hero {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: end;
+    }
+
+    .module-hero h2 {
+      margin: 0;
+      color: var(--blue);
+      font-size: 26px;
+    }
+
+    .module-hero p {
+      margin: 6px 0 0;
+      color: var(--muted);
+      line-height: 1.4;
+    }
+
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 14px;
+    }
+
+    .module-card {
+      min-height: 180px;
+      border: 1px solid #dce3ee;
+      border-radius: 12px;
+      background: white;
+      padding: 18px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 12px;
+      text-align: left;
+      box-shadow: 0 12px 26px rgba(31, 41, 55, 0.08);
+      cursor: pointer;
+    }
+
+    .module-card:hover {
+      border-color: var(--blue);
+      background: #f7fbff;
+    }
+
+    .module-card .module-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      background: var(--blue);
+      color: white;
+      font-weight: 900;
+    }
+
+    .module-card h3 {
+      margin: 0;
+      color: var(--blue);
+      font-size: 20px;
+    }
+
+    .module-card p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      line-height: 1.4;
+      font-size: 14px;
+    }
+
+    .module-card .arrow {
+      justify-self: end;
+    }
+
+    .grade-view {
+      min-height: 100vh;
+      background: var(--soft);
+      padding: 8px;
+    }
+
+    .grade-shell {
+      min-height: calc(100vh - 16px);
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 22px rgba(31, 41, 55, 0.08);
+      display: grid;
+      grid-template-rows: auto auto 1fr;
+    }
+
+    .grade-top {
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 8px 12px;
+      border-bottom: 1px solid var(--line);
+      background: white;
+    }
+
+    .grade-tabs {
+      display: flex;
+      background: #f8fafc;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .grade-tab {
+      border-radius: 0;
+      border: 0;
+      border-right: 1px solid var(--line);
+      background: #f8fafc;
+      padding: 8px 14px;
+      color: #344054;
+      font-weight: 800;
+    }
+
+    .grade-tab.active {
+      background: var(--blue);
+      color: white;
+    }
+
+    .grade-content {
+      padding: 14px;
+      overflow: auto;
+      display: grid;
+      gap: 14px;
+      align-content: start;
+    }
+
+    .grade-toolbar,
+    .grade-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .grade-toolbar {
+      justify-content: space-between;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px;
+      background: #fbfcfe;
+    }
+
+    .grade-actions button,
+    .grade-toolbar button,
+    .grade-card button {
+      border: 1px solid #bfd0e2;
+      background: #eef5fb;
+      color: var(--blue);
+      font-weight: 800;
+    }
+
+    .grade-actions .primary,
+    .grade-toolbar .primary {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: white;
+    }
+
+    .grade-card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .grade-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: white;
+      padding: 14px;
+      display: grid;
+      gap: 8px;
+      min-height: 112px;
+      box-shadow: 0 8px 18px rgba(31, 41, 55, 0.05);
+    }
+
+    .grade-card h3 {
+      margin: 0;
+      color: var(--blue);
+      font-size: 17px;
+    }
+
+    .grade-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    .grade-table-wrap {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: auto;
+      background: white;
+    }
+
+    .grade-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 980px;
+      font-size: 13px;
+    }
+
+    .grade-table th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      background: var(--blue);
+      color: white;
+      text-align: left;
+      padding: 9px;
+      border: 1px solid #1b4267;
+    }
+
+    .grade-table td {
+      padding: 7px 8px;
+      border: 1px solid var(--line);
+      vertical-align: middle;
+    }
+
+    .grade-table tbody tr:nth-child(even) {
+      background: #fbfcfe;
+    }
+
+    .student-name {
+      font-weight: 800;
+      color: var(--ink);
+    }
+
+    .grade-input {
+      width: 58px;
+      padding: 6px;
+      text-align: center;
+      border: 1px solid #98b9d7;
+      border-radius: 5px;
+      background: #f7fbff;
+      font-size: 13px;
+    }
+
+    .grade-input:disabled {
+      background: #eef2f6;
+      color: #667085;
+    }
+
+    .average-cell {
+      font-weight: 900;
+      color: var(--blue);
+      text-align: center;
+    }
+
+    .grade-alert {
+      border: 1px solid #ecd17e;
+      background: #fff8df;
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: #344054;
+    }
+
+    .grade-stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+
+    .student-report {
+      width: min(100%, 850px);
+      margin: 0 auto;
+      padding: 42px 48px;
+      border: 1px solid #d8dee8;
+      background: white;
+      box-shadow: 0 10px 24px rgba(15, 23, 42, 0.12);
+    }
+
+    .student-report-header {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: center;
+      border-bottom: 2px solid var(--blue);
+      padding-bottom: 10px;
+      margin-bottom: 14px;
+    }
+
+    .signature-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 42px;
+      margin-top: 48px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .signature-line {
+      border-top: 1px solid #344054;
+      padding-top: 7px;
+    }
+
     .activity-view {
       min-height: 100vh;
       background: var(--soft);
@@ -1389,13 +1703,57 @@
     <main>
       <section class="intro">
         <div>
-          <h2>Solicitud sala de computaci&oacute;n</h2>
-          <p>Selecciona tu perfil para reservar un horario de uso de la sala.</p>
+          <h2>Plataforma docente Escuela Unesco</h2>
+          <p>Selecciona tu perfil para ingresar a los m&oacute;dulos disponibles.</p>
         </div>
         <input class="search" id="search" type="search" placeholder="Buscar profesor/a">
       </section>
-      <div class="notice">Esta aplicaci&oacute;n es solo para solicitudes de sala de computaci&oacute;n.</div>
+      <div class="notice">Acceso a solicitud de sala de computaci&oacute;n, informes de notas y herramientas docentes.</div>
       <section class="profiles" id="profileGrid" aria-label="Perfiles docentes"></section>
+    </main>
+  </section>
+
+  <section class="module-home hidden" id="moduleChooserView">
+    <header class="brand">
+      <svg class="logo" viewBox="0 0 100 100" role="img" aria-label="Logo Escuela Unesco">
+        <polygon points="50,5 88,25 88,75 50,95 12,75 12,25" fill="#f4d76f" />
+        <polygon points="50,12 81,29 81,71 50,88 19,71 19,29" fill="#7280d4" />
+        <polygon points="50,20 73,33 73,67 50,80 27,67 27,33" fill="#ffffff" opacity="0.25" />
+        <text x="50" y="43" text-anchor="middle" font-family="Arial" font-size="16" font-weight="700" fill="#ffffff">UNESCO</text>
+        <line x1="31" y1="48" x2="69" y2="48" stroke="#ffffff" stroke-width="2" />
+        <text x="50" y="62" text-anchor="middle" font-family="Arial" font-size="8" fill="#ffffff">VI&Ntilde;A DEL MAR</text>
+      </svg>
+      <div class="brand-title">
+        <h1>Escuela Unesco</h1>
+        <p>&ldquo;Educar para la Paz&rdquo;</p>
+      </div>
+    </header>
+    <main class="module-main">
+      <section class="module-hero">
+        <div>
+          <h2 id="moduleChooserTitle">Perfil docente</h2>
+          <p id="moduleChooserSubtitle">Selecciona el m&oacute;dulo que usar&aacute;s.</p>
+        </div>
+        <button class="back" type="button" id="moduleBackHomeBtn">Cambiar perfil</button>
+      </section>
+      <section class="module-grid" aria-label="M&oacute;dulos disponibles">
+        <button class="module-card" type="button" id="openRoomModule">
+          <span class="module-icon">PC</span>
+          <span>
+            <h3>Solicitud de sala de computaci&oacute;n</h3>
+            <p>Reserva horarios, revisa disponibilidad y consulta estad&iacute;sticas de uso.</p>
+          </span>
+          <span class="arrow">&rsaquo;</span>
+        </button>
+        <button class="module-card" type="button" id="openGradesModule">
+          <span class="module-icon">70</span>
+          <span>
+            <h3>Informe de notas</h3>
+            <p>Completa notas por curso y asignatura. UTP puede revisar avance, estad&iacute;sticas e informes.</p>
+          </span>
+          <span class="arrow">&rsaquo;</span>
+        </button>
+      </section>
     </main>
   </section>
 
@@ -1627,6 +1985,31 @@
     </section>
   </main>
 
+  <main class="grade-view hidden" id="gradebookView">
+    <section class="grade-shell">
+      <header class="grade-top">
+        <svg class="small-logo" viewBox="0 0 100 100" role="img" aria-label="Logo Escuela Unesco">
+          <polygon points="50,5 88,25 88,75 50,95 12,75 12,25" fill="#f4d76f" />
+          <polygon points="50,12 81,29 81,71 50,88 19,71 19,29" fill="#7280d4" />
+          <polygon points="50,20 73,33 73,67 50,80 27,67 27,33" fill="#ffffff" opacity="0.25" />
+          <text x="50" y="43" text-anchor="middle" font-family="Arial" font-size="16" font-weight="700" fill="#ffffff">UNESCO</text>
+          <line x1="31" y1="48" x2="69" y2="48" stroke="#ffffff" stroke-width="2" />
+          <text x="50" y="62" text-anchor="middle" font-family="Arial" font-size="8" fill="#ffffff">VI&Ntilde;A DEL MAR</text>
+        </svg>
+        <div>
+          <div class="school-name">Escuela Unesco</div>
+          <div class="school-motto">Informe de notas de estudiantes</div>
+        </div>
+        <div class="profile-name">
+          <div id="gradebookProfileName">Perfil docente</div>
+          <button class="back" type="button" id="backToModulesFromGrades">Volver a opciones</button>
+        </div>
+      </header>
+      <nav class="grade-tabs" id="gradebookTabs" aria-label="M&oacute;dulo informe de notas"></nav>
+      <section class="grade-content" id="gradebookContent"></section>
+    </section>
+  </main>
+
   <script>
     const teachers = [
       "Betsy Vega",
@@ -1662,6 +2045,10 @@
     const supabaseTable = "solicitudes_sala";
     const activityPlansTable = "activity_plans";
     const activityFeedbackTable = "activity_plan_feedback";
+    const gradebookStudentsTable = "gradebook_students";
+    const gradebookEntriesTable = "gradebook_entries";
+    const gradebookAttendanceTable = "gradebook_attendance";
+    const gradeSlots = 8;
     const smartTemplateThreshold = 3;
     const geminiGenerationEndpoint = "/api/generar-actividad";
     const geminiGenerationEnabled = true;
@@ -2805,6 +3192,13 @@
     let currentActivityPlan = null;
     let currentActivityRating = 0;
     let currentActivityDocumentView = "plan";
+    let gradebookStudents = [];
+    let gradebookEntries = [];
+    let gradebookAttendance = [];
+    let gradebookSelectedCourse = "";
+    let gradebookSelectedSubject = "";
+    let gradebookSelectedStudentId = "";
+    let gradeEditMode = false;
     let selectedDate = "";
     let activeView = "calendar";
     let statsScope = "month";
@@ -2814,8 +3208,10 @@
     let visibleYear = initialMonth.year;
 
     const homeView = document.getElementById("homeView");
+    const moduleChooserView = document.getElementById("moduleChooserView");
     const appView = document.getElementById("appView");
     const activityView = document.getElementById("activityView");
+    const gradebookView = document.getElementById("gradebookView");
     const grid = document.getElementById("profileGrid");
     const search = document.getElementById("search");
     const calendarBody = document.getElementById("calendarBody");
@@ -2858,6 +3254,11 @@
     const activityType = document.getElementById("activityType");
     const activityStars = document.getElementById("activityStars");
     const activityRatingComment = document.getElementById("activityRatingComment");
+    const moduleChooserTitle = document.getElementById("moduleChooserTitle");
+    const moduleChooserSubtitle = document.getElementById("moduleChooserSubtitle");
+    const gradebookProfileName = document.getElementById("gradebookProfileName");
+    const gradebookTabs = document.getElementById("gradebookTabs");
+    const gradebookContent = document.getElementById("gradebookContent");
 
     function renderProfiles(filter = "") {
       const term = normalize(filter);
@@ -2889,16 +3290,66 @@
       }
       teacher = name;
       homeView.classList.add("hidden");
-      appView.classList.remove("hidden");
+      moduleChooserView.classList.remove("hidden");
+      appView.classList.add("hidden");
       activityView.classList.add("hidden");
+      gradebookView.classList.add("hidden");
       teacherInput.value = teacher;
       profileName.textContent = teacher;
       activityProfileName.textContent = teacher;
+      gradebookProfileName.textContent = teacher;
+      moduleChooserTitle.textContent = isAdminProfile() ? "Panel Administraci\u00f3n - UTP" : teacher;
+      moduleChooserSubtitle.textContent = isAdminProfile()
+        ? "Selecciona el m\u00f3dulo institucional que deseas revisar."
+        : "Selecciona el m\u00f3dulo que usar\u00e1s.";
+      resetForm();
+      appView.classList.toggle("admin-mode", isAdminProfile());
+    };
+
+    function openModuleChooser() {
+      homeView.classList.add("hidden");
+      appView.classList.add("hidden");
+      activityView.classList.add("hidden");
+      gradebookView.classList.add("hidden");
+      moduleChooserView.classList.remove("hidden");
+    }
+
+    function backToProfileSelector() {
+      teacher = "";
+      moduleChooserView.classList.add("hidden");
+      appView.classList.add("hidden");
+      activityView.classList.add("hidden");
+      gradebookView.classList.add("hidden");
+      appView.classList.remove("admin-mode", "stats-mode");
+      homeView.classList.remove("hidden");
+    }
+
+    function openRoomModule() {
+      moduleChooserView.classList.add("hidden");
+      gradebookView.classList.add("hidden");
+      activityView.classList.add("hidden");
+      appView.classList.remove("hidden");
+      teacherInput.value = teacher;
+      profileName.textContent = teacher;
       resetForm();
       appView.classList.toggle("admin-mode", isAdminProfile());
       setView(isAdminProfile() ? "stats" : "calendar");
       loadRequestsFromServer();
-    };
+    }
+
+    function openGradesModule() {
+      moduleChooserView.classList.add("hidden");
+      appView.classList.add("hidden");
+      activityView.classList.add("hidden");
+      gradebookView.classList.remove("hidden");
+      gradebookProfileName.textContent = teacher;
+      gradebookSelectedCourse = "";
+      gradebookSelectedSubject = "";
+      gradebookSelectedStudentId = "";
+      gradeEditMode = false;
+      renderGradebook();
+      loadGradebookBaseData();
+    }
 
     async function loadRequestsFromServer() {
       statusHint.textContent = "Cargando solicitudes...";
@@ -4212,6 +4663,575 @@
       `;
     }
 
+    function gradebookCoursesForTeacher(name) {
+      if (isAdminProfile()) return courses.filter(course => gradeFromCourse(course) >= 1);
+      return coursesForTeacher(name).filter(course => gradeFromCourse(course) >= 1);
+    }
+
+    function gradebookSubjectsForTeacherCourse(name, course) {
+      return subjectsForTeacherCourse(name, course)
+        .filter(subject => !["Mantenci\u00f3n", "Educaci\u00f3n Parvularia"].includes(subject));
+    }
+
+    async function loadGradebookBaseData() {
+      gradebookContent.insertAdjacentHTML("afterbegin", `<div class="notice" id="gradebookLoading">Cargando datos de notas...</div>`);
+      try {
+        const [students, entries, attendance] = await Promise.all([
+          supabaseRequest(`${gradebookStudentsTable}?select=*&estado=eq.activo&order=curso.asc,apellido_paterno.asc,apellido_materno.asc,nombres.asc`),
+          supabaseRequest(`${gradebookEntriesTable}?select=*&order=updated_at.desc`),
+          supabaseRequest(`${gradebookAttendanceTable}?select=*`),
+        ]);
+        gradebookStudents = (students || []).map(fromGradebookStudentRow);
+        gradebookEntries = (entries || []).map(fromGradebookEntryRow);
+        gradebookAttendance = (attendance || []).map(fromGradebookAttendanceRow);
+        renderGradebook();
+      } catch (error) {
+        gradebookContent.innerHTML = `
+          <div class="grade-alert">
+            No se pudieron cargar las tablas de notas. Revisa si ya ejecutaste el SQL del m&oacute;dulo en Supabase.<br>
+            <strong>Detalle:</strong> ${escapeHtml(error.message || error)}
+          </div>
+          <div class="grade-actions">
+            <button type="button" onclick="renderGradebook()">Volver a intentar</button>
+          </div>
+        `;
+      }
+    }
+
+    function renderGradebook(view = "") {
+      if (isAdminProfile()) {
+        renderGradebookTabs(view || "utp");
+        if ((view || "utp") === "students") renderGradebookStudentReports();
+        else renderGradebookUtpDashboard();
+        return;
+      }
+      renderGradebookTabs(view || "courses");
+      if (gradebookSelectedSubject) renderTeacherGradebookTable();
+      else if (gradebookSelectedCourse) renderTeacherSubjectCards();
+      else renderTeacherCourseCards();
+    }
+
+    function renderGradebookTabs(active = "courses") {
+      if (isAdminProfile()) {
+        gradebookTabs.innerHTML = `
+          <button class="grade-tab ${active === "utp" ? "active" : ""}" type="button" onclick="renderGradebook('utp')">Resumen UTP</button>
+          <button class="grade-tab ${active === "students" ? "active" : ""}" type="button" onclick="renderGradebook('students')">Informes por estudiante</button>
+        `;
+        return;
+      }
+      gradebookTabs.innerHTML = `
+        <button class="grade-tab ${active === "courses" ? "active" : ""}" type="button" onclick="resetTeacherGradebook()">Mis cursos</button>
+        <button class="grade-tab ${active === "table" ? "active" : ""}" type="button" ${gradebookSelectedSubject ? `onclick="renderTeacherGradebookTable()"` : "disabled"}>Planilla</button>
+      `;
+    }
+
+    window.resetTeacherGradebook = function() {
+      gradebookSelectedCourse = "";
+      gradebookSelectedSubject = "";
+      gradeEditMode = false;
+      renderGradebook("courses");
+    };
+
+    function renderTeacherCourseCards() {
+      const teacherCourses = gradebookCoursesForTeacher(teacher);
+      gradebookContent.innerHTML = `
+        <section class="grade-toolbar">
+          <div>
+            <strong>Informe de notas</strong><br>
+            <span class="saved-meta">Selecciona un curso. Solo aparecen los cursos asignados a este perfil.</span>
+          </div>
+        </section>
+        ${teacherCourses.length ? `
+          <section class="grade-card-grid">
+            ${teacherCourses.map(course => `
+              <article class="grade-card">
+                <h3>${escapeHtml(course)}</h3>
+                <p>${gradebookSubjectsForTeacherCourse(teacher, course).length} asignatura${gradebookSubjectsForTeacherCourse(teacher, course).length === 1 ? "" : "s"} disponible${gradebookSubjectsForTeacherCourse(teacher, course).length === 1 ? "" : "s"}.</p>
+                <button type="button" onclick="selectGradebookCourse('${escapeJs(course)}')">Ingresar al curso</button>
+              </article>
+            `).join("")}
+          </section>
+        ` : `<div class="grade-alert">Este perfil no tiene cursos asignados para informe de notas.</div>`}
+      `;
+    }
+
+    window.selectGradebookCourse = function(course) {
+      gradebookSelectedCourse = course;
+      gradebookSelectedSubject = "";
+      gradeEditMode = false;
+      renderTeacherSubjectCards();
+    };
+
+    function renderTeacherSubjectCards() {
+      const subjects = gradebookSubjectsForTeacherCourse(teacher, gradebookSelectedCourse);
+      gradebookContent.innerHTML = `
+        <section class="grade-toolbar">
+          <div>
+            <strong>${escapeHtml(gradebookSelectedCourse)}</strong><br>
+            <span class="saved-meta">Selecciona la asignatura que completar&aacute;s.</span>
+          </div>
+          <button type="button" onclick="resetTeacherGradebook()">Volver a cursos</button>
+        </section>
+        <section class="grade-card-grid">
+          ${subjects.map(subject => `
+            <article class="grade-card">
+              <h3>${escapeHtml(subject)}</h3>
+              <p>Planilla de notas y promedio autom&aacute;tico.</p>
+              <button type="button" onclick="selectGradebookSubject('${escapeJs(subject)}')">Abrir planilla</button>
+            </article>
+          `).join("")}
+        </section>
+      `;
+    }
+
+    window.selectGradebookSubject = function(subject) {
+      gradebookSelectedSubject = subject;
+      gradeEditMode = false;
+      renderTeacherGradebookTable();
+    };
+
+    function sortedStudentsForCourse(course) {
+      return gradebookStudents
+        .filter(student => student.course === course)
+        .sort((a, b) => studentSortKey(a).localeCompare(studentSortKey(b), "es"));
+    }
+
+    function studentSortKey(student) {
+      return `${student.lastName1} ${student.lastName2} ${student.names}`.trim();
+    }
+
+    function entryForStudent(studentId, course = gradebookSelectedCourse, subject = gradebookSelectedSubject, professor = teacher) {
+      return gradebookEntries.find(entry =>
+        entry.studentId === studentId &&
+        entry.course === course &&
+        entry.subject === subject &&
+        entry.teacher === professor
+      );
+    }
+
+    function renderTeacherGradebookTable() {
+      renderGradebookTabs("table");
+      const students = sortedStudentsForCourse(gradebookSelectedCourse);
+      const rows = students.map((student, index) => {
+        const entry = entryForStudent(student.id);
+        const grades = entry ? entry.grades : [];
+        return `
+          <tr data-student-id="${escapeHtml(student.id)}">
+            <td>${index + 1}</td>
+            <td>
+              <div class="student-name">${escapeHtml(studentFullName(student))}</div>
+              <div class="saved-meta">${escapeHtml(student.run || "")}</div>
+            </td>
+            ${Array.from({ length: gradeSlots }, (_, gradeIndex) => `
+              <td><input class="grade-input" data-grade-index="${gradeIndex}" inputmode="numeric" maxlength="2" value="${escapeHtml(grades[gradeIndex] || "")}" ${gradeEditMode ? "" : "disabled"} oninput="validateGradeInput(this)" onblur="updateRowAverage(this.closest('tr'))"></td>
+            `).join("")}
+            <td class="average-cell">${formatAverage(calculateAverage(grades))}</td>
+          </tr>
+        `;
+      }).join("");
+
+      gradebookContent.innerHTML = `
+        <section class="grade-toolbar">
+          <div>
+            <strong>${escapeHtml(gradebookSelectedCourse)} | ${escapeHtml(gradebookSelectedSubject)}</strong><br>
+            <span class="saved-meta">Profesor/a: ${escapeHtml(teacher)}. Las notas deben ser n&uacute;meros enteros entre 10 y 70.</span>
+          </div>
+          <div class="grade-actions">
+            <button type="button" onclick="selectGradebookCourse('${escapeJs(gradebookSelectedCourse)}')">Volver a asignaturas</button>
+            <button type="button" onclick="toggleGradeEditMode()" class="${gradeEditMode ? "" : "primary"}">${gradeEditMode ? "Bloquear edici&oacute;n" : "Ingresar notas"}</button>
+            <button type="button" onclick="saveGradebookEntries()" class="primary">Guardar planilla</button>
+          </div>
+        </section>
+        ${students.length ? `
+          <div class="grade-table-wrap">
+            <table class="grade-table">
+              <thead>
+                <tr>
+                  <th>N&deg;</th>
+                  <th>Estudiante</th>
+                  ${Array.from({ length: gradeSlots }, (_, i) => `<th>Nota ${i + 1}</th>`).join("")}
+                  <th>Promedio</th>
+                </tr>
+              </thead>
+              <tbody id="gradebookRows">${rows}</tbody>
+            </table>
+          </div>
+        ` : `
+          <div class="grade-alert">
+            No hay estudiantes cargados para ${escapeHtml(gradebookSelectedCourse)}. UTP debe cargar la n&oacute;mina en Supabase antes de completar notas.
+          </div>
+        `}
+      `;
+    }
+
+    window.toggleGradeEditMode = function() {
+      gradeEditMode = !gradeEditMode;
+      renderTeacherGradebookTable();
+    };
+
+    window.validateGradeInput = function(input) {
+      const original = input.value;
+      if (/[.,]/.test(original)) {
+        alert("Las notas no pueden llevar decimales. Ingresa un n\u00famero entero entre 10 y 70.");
+        input.value = original.replace(/[.,].*$/, "");
+      }
+      input.value = input.value.replace(/\D/g, "").slice(0, 2);
+      if (!input.value) {
+        updateRowAverage(input.closest("tr"));
+        return;
+      }
+      const grade = Number(input.value);
+      if (input.value.length >= 2 && (grade < 10 || grade > 70)) {
+        alert("La nota debe estar entre 10 y 70.");
+        input.value = "";
+      }
+      updateRowAverage(input.closest("tr"));
+    };
+
+    window.updateRowAverage = function(row) {
+      if (!row) return;
+      const grades = readGradesFromRow(row);
+      const cell = row.querySelector(".average-cell");
+      if (cell) cell.textContent = formatAverage(calculateAverage(grades));
+    };
+
+    function readGradesFromRow(row) {
+      return [...row.querySelectorAll(".grade-input")]
+        .map(input => input.value.trim())
+        .filter(Boolean)
+        .map(Number);
+    }
+
+    function calculateAverage(grades) {
+      const valid = (grades || []).map(Number).filter(value => Number.isInteger(value) && value >= 10 && value <= 70);
+      if (!valid.length) return null;
+      return Math.round(valid.reduce((sum, value) => sum + value, 0) / valid.length);
+    }
+
+    function formatAverage(value) {
+      return value ? String(value) : "-";
+    }
+
+    async function saveGradebookEntries() {
+      const rows = [...gradebookContent.querySelectorAll("tbody tr[data-student-id]")];
+      if (!rows.length) return;
+      const invalid = rows.some(row => readGradesFromRow(row).some(value => !Number.isInteger(value) || value < 10 || value > 70));
+      if (invalid) {
+        alert("Hay notas fuera de rango. Revisa que todas sean enteros entre 10 y 70.");
+        return;
+      }
+
+      const payloads = rows.map(row => {
+        const studentId = row.dataset.studentId;
+        const grades = [...row.querySelectorAll(".grade-input")].map(input => input.value.trim()).map(value => value ? Number(value) : null);
+        return {
+          studentId,
+          grades,
+          average: calculateAverage(grades),
+          existing: entryForStudent(studentId),
+        };
+      });
+
+      try {
+        for (const item of payloads) {
+          const body = {
+            student_id: item.studentId,
+            profesor: teacher,
+            curso: gradebookSelectedCourse,
+            asignatura: gradebookSelectedSubject,
+            notas: item.grades,
+            promedio: item.average,
+          };
+          if (item.existing && item.existing.id) {
+            await supabaseRequest(`${gradebookEntriesTable}?id=eq.${encodeURIComponent(item.existing.id)}`, {
+              method: "PATCH",
+              body: JSON.stringify(body),
+            });
+          } else {
+            await supabaseRequest(gradebookEntriesTable, {
+              method: "POST",
+              headers: { Prefer: "return=minimal" },
+              body: JSON.stringify(body),
+            });
+          }
+        }
+        alert("Planilla guardada correctamente.");
+        gradeEditMode = false;
+        await loadGradebookBaseData();
+        gradebookSelectedCourse = payloads.length ? gradebookSelectedCourse : "";
+        gradebookSelectedSubject = payloads.length ? gradebookSelectedSubject : "";
+        renderTeacherGradebookTable();
+      } catch (error) {
+        alert(error.message || error);
+      }
+    }
+
+    function renderGradebookUtpDashboard() {
+      const activeEntries = gradebookEntries.filter(entry => entry.grades.some(value => value));
+      const uniqueAssignments = new Set(activeEntries.map(entry => `${entry.teacher}|${entry.course}|${entry.subject}`));
+      const teacherStats = teachers
+        .filter(name => gradebookCoursesForTeacher(name).length)
+        .map(name => {
+          const assigned = gradebookCoursesForTeacher(name).reduce((sum, course) => sum + gradebookSubjectsForTeacherCourse(name, course).length, 0);
+          const completed = [...uniqueAssignments].filter(key => key.startsWith(`${name}|`)).length;
+          return { name, assigned, completed, pct: assigned ? Math.round((completed / assigned) * 100) : 0 };
+        });
+      const courseCounts = countBy(activeEntries, "course");
+      const subjectCounts = countBy(activeEntries, "subject");
+
+      gradebookContent.innerHTML = `
+        <section class="grade-toolbar">
+          <div>
+            <strong>Panel pedag&oacute;gico UTP</strong><br>
+            <span class="saved-meta">Avance de carga de notas, estad&iacute;sticas por curso/asignatura e informes.</span>
+          </div>
+          <div class="grade-actions">
+            <button type="button" onclick="downloadWholeSchoolGrades()"><span class="file-icon">CSV</span> Descargar notas escuela</button>
+          </div>
+        </section>
+        <section class="grade-stats-grid">
+          ${metricCard("Estudiantes cargados", gradebookStudents.length)}
+          ${metricCard("Planillas con notas", uniqueAssignments.size)}
+          ${metricCard("Registros de notas", activeEntries.length)}
+          ${metricCard("Cursos con avance", Object.keys(courseCounts).length)}
+        </section>
+        <h2 class="stats-section-title">Avance por profesor/a</h2>
+        <section class="stats-grid">
+          ${teacherStats.map(stat => `
+            <article class="metric">
+              <span>${escapeHtml(stat.name)}</span>
+              <strong>${stat.pct}%</strong>
+              <div class="bar"><span style="width:${stat.pct}%"></span></div>
+              <div class="saved-meta">${stat.completed} de ${stat.assigned} planillas con notas.</div>
+            </article>
+          `).join("")}
+        </section>
+        <h2 class="stats-section-title">Estad&iacute;sticas pedag&oacute;gicas</h2>
+        <section class="stats-grid">
+          ${statsCard("Registros por curso", courseCounts)}
+          ${statsCard("Registros por asignatura", subjectCounts)}
+        </section>
+        <h2 class="stats-section-title">Cursos</h2>
+        <section class="grade-card-grid">
+          ${courses.filter(course => gradeFromCourse(course) >= 1).map(course => `
+            <article class="grade-card">
+              <h3>${escapeHtml(course)}</h3>
+              <p>${gradebookStudents.filter(student => student.course === course).length} estudiantes | ${gradebookEntries.filter(entry => entry.course === course).length} registros de notas.</p>
+              <button type="button" onclick="openAdminCourseReport('${escapeJs(course)}')">Ver informes del curso</button>
+            </article>
+          `).join("")}
+        </section>
+      `;
+    }
+
+    function metricCard(label, value) {
+      return `<article class="metric"><span>${escapeHtml(label)}</span><strong>${escapeHtml(value)}</strong></article>`;
+    }
+
+    window.openAdminCourseReport = function(course) {
+      gradebookSelectedCourse = course;
+      gradebookSelectedStudentId = "";
+      renderGradebook("students");
+    };
+
+    function renderGradebookStudentReports() {
+      const adminCourses = courses.filter(course => gradeFromCourse(course) >= 1);
+      if (!gradebookSelectedCourse) gradebookSelectedCourse = adminCourses[0] || "";
+      const students = sortedStudentsForCourse(gradebookSelectedCourse);
+      if (!gradebookSelectedStudentId && students[0]) gradebookSelectedStudentId = students[0].id;
+      const selectedStudent = students.find(student => student.id === gradebookSelectedStudentId);
+
+      gradebookContent.innerHTML = `
+        <section class="grade-toolbar">
+          <div class="grade-actions">
+            <label>Curso
+              <select onchange="gradebookSelectedCourse=this.value; gradebookSelectedStudentId=''; renderGradebook('students')">
+                ${adminCourses.map(course => `<option value="${escapeHtml(course)}" ${course === gradebookSelectedCourse ? "selected" : ""}>${escapeHtml(course)}</option>`).join("")}
+              </select>
+            </label>
+            <label>Estudiante
+              <select onchange="gradebookSelectedStudentId=this.value; renderGradebook('students')">
+                ${students.map(student => `<option value="${escapeHtml(student.id)}" ${student.id === gradebookSelectedStudentId ? "selected" : ""}>${escapeHtml(studentFullName(student))}</option>`).join("")}
+              </select>
+            </label>
+          </div>
+          <div class="grade-actions">
+            <button type="button" onclick="downloadSelectedStudentReportPdf()"><span class="file-icon pdf">PDF</span> Informe estudiante</button>
+            <button type="button" onclick="downloadCourseReportsPdf()"><span class="file-icon pdf">PDF</span> Curso completo</button>
+          </div>
+        </section>
+        ${selectedStudent ? studentReportEditorHtml(selectedStudent) : `<div class="grade-alert">No hay estudiantes cargados en este curso.</div>`}
+      `;
+    }
+
+    function studentReportEditorHtml(student) {
+      const attendance = attendanceForStudent(student.id, student.course);
+      return `
+        <section class="grade-toolbar">
+          <div>
+            <strong>${escapeHtml(studentFullName(student))}</strong><br>
+            <span class="saved-meta">${escapeHtml(student.course)} | Informe individual</span>
+          </div>
+          <div class="grade-actions">
+            <label>Asistencia %
+              <input id="studentAttendanceInput" type="number" min="0" max="100" step="1" value="${attendance ?? ""}" placeholder="Ej: 92">
+            </label>
+            <button class="primary" type="button" onclick="saveStudentAttendance('${escapeJs(student.id)}','${escapeJs(student.course)}')">Guardar asistencia</button>
+          </div>
+        </section>
+        ${studentReportHtml(student, attendance)}
+      `;
+    }
+
+    function studentReportHtml(student, attendance = attendanceForStudent(student.id, student.course)) {
+      const rows = gradebookEntries
+        .filter(entry => entry.studentId === student.id && entry.course === student.course)
+        .sort((a, b) => a.subject.localeCompare(b.subject, "es"))
+        .map(entry => `
+          <tr>
+            <td>${escapeHtml(entry.subject)}</td>
+            <td>${escapeHtml(entry.teacher)}</td>
+            <td>${entry.grades.filter(Boolean).map(escapeHtml).join(" - ") || "Sin notas"}</td>
+            <td><strong>${formatAverage(entry.average)}</strong></td>
+          </tr>
+        `).join("");
+      return `
+        <article class="student-report">
+          <header class="student-report-header">
+            ${schoolLogoSvg("plan-logo")}
+            <div>
+              <h1>Informe de notas</h1>
+              <p>Escuela Unesco &ldquo;Educar para la Paz&rdquo;</p>
+            </div>
+          </header>
+          <div class="plan-meta">
+            <div><strong>Estudiante:</strong> ${escapeHtml(studentFullName(student))}</div>
+            <div><strong>Curso:</strong> ${escapeHtml(student.course)}</div>
+            <div><strong>Asistencia:</strong> ${attendance || attendance === 0 ? `${attendance}%` : "Sin registrar"}</div>
+            <div><strong>Fecha:</strong> ${new Date().toLocaleDateString("es-CL")}</div>
+          </div>
+          <table class="plan-table">
+            <thead><tr><th>Asignatura</th><th>Profesor/a</th><th>Notas</th><th>Promedio</th></tr></thead>
+            <tbody>${rows || `<tr><td colspan="4">Sin notas registradas.</td></tr>`}</tbody>
+          </table>
+          <footer class="signature-row">
+            <div class="signature-line">Firma Director/a</div>
+            <div class="signature-line">Firma Profesor/a jefe</div>
+          </footer>
+        </article>
+      `;
+    }
+
+    function attendanceForStudent(studentId, course) {
+      const found = gradebookAttendance.find(item => item.studentId === studentId && item.course === course);
+      return found ? found.attendance : null;
+    }
+
+    window.saveStudentAttendance = async function(studentId, course) {
+      const input = document.getElementById("studentAttendanceInput");
+      const value = Number(input.value);
+      if (!Number.isInteger(value) || value < 0 || value > 100) {
+        alert("La asistencia debe ser un n\u00famero entero entre 0 y 100.");
+        return;
+      }
+      const existing = gradebookAttendance.find(item => item.studentId === studentId && item.course === course);
+      try {
+        const body = { student_id: studentId, curso: course, asistencia: value };
+        if (existing && existing.id) {
+          await supabaseRequest(`${gradebookAttendanceTable}?id=eq.${encodeURIComponent(existing.id)}`, { method: "PATCH", body: JSON.stringify(body) });
+        } else {
+          await supabaseRequest(gradebookAttendanceTable, { method: "POST", headers: { Prefer: "return=minimal" }, body: JSON.stringify(body) });
+        }
+        await loadGradebookBaseData();
+        renderGradebook("students");
+      } catch (error) {
+        alert(error.message || error);
+      }
+    };
+
+    window.downloadSelectedStudentReportPdf = function() {
+      const student = gradebookStudents.find(item => item.id === gradebookSelectedStudentId);
+      if (!student) return;
+      printHtmlAsPdf(`Informe de notas - ${studentFullName(student)}`, studentReportHtml(student));
+    };
+
+    window.downloadCourseReportsPdf = function() {
+      const reports = sortedStudentsForCourse(gradebookSelectedCourse)
+        .map(student => studentReportHtml(student))
+        .join(`<div style="page-break-after: always;"></div>`);
+      printHtmlAsPdf(`Informes de notas - ${gradebookSelectedCourse}`, reports);
+    };
+
+    window.downloadWholeSchoolGrades = function() {
+      const headers = ["Curso", "Estudiante", "RUN", "Asignatura", "Profesor/a", ...Array.from({ length: gradeSlots }, (_, i) => `Nota ${i + 1}`), "Promedio", "Asistencia"];
+      const lines = [headers.join(";")];
+      gradebookEntries.forEach(entry => {
+        const student = gradebookStudents.find(item => item.id === entry.studentId);
+        if (!student) return;
+        const attendance = attendanceForStudent(student.id, student.course);
+        lines.push([
+          entry.course,
+          studentFullName(student),
+          student.run || "",
+          entry.subject,
+          entry.teacher,
+          ...Array.from({ length: gradeSlots }, (_, i) => entry.grades[i] || ""),
+          entry.average || "",
+          attendance ?? "",
+        ].map(csvCell).join(";"));
+      });
+      const blob = new Blob(["\ufeff", lines.join("\n")], { type: "text/csv;charset=utf-8" });
+      const link = document.createElement("a");
+      link.href = URL.createObjectURL(blob);
+      link.download = "notas-escuela-unesco.csv";
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(() => URL.revokeObjectURL(link.href), 800);
+    };
+
+    function csvCell(value) {
+      return `"${String(value ?? "").replaceAll('"', '""')}"`;
+    }
+
+    function studentFullName(student) {
+      return `${student.lastName1} ${student.lastName2} ${student.names}`.replace(/\s+/g, " ").trim();
+    }
+
+    function fromGradebookStudentRow(row) {
+      return {
+        id: row.id,
+        course: row.curso,
+        names: row.nombres || "",
+        lastName1: row.apellido_paterno || "",
+        lastName2: row.apellido_materno || "",
+        run: row.run || "",
+        status: row.estado || "activo",
+      };
+    }
+
+    function fromGradebookEntryRow(row) {
+      return {
+        id: row.id,
+        studentId: row.student_id,
+        teacher: row.profesor,
+        course: row.curso,
+        subject: row.asignatura,
+        grades: Array.isArray(row.notas) ? row.notas : [],
+        average: row.promedio || null,
+        updatedAt: row.updated_at || "",
+      };
+    }
+
+    function fromGradebookAttendanceRow(row) {
+      return {
+        id: row.id,
+        studentId: row.student_id,
+        course: row.curso,
+        attendance: row.asistencia,
+      };
+    }
+
     function exportDocumentCss() {
       return `
         body { font-family: Arial, Helvetica, sans-serif; color: #1f2937; margin: 28px; }
@@ -4253,6 +5273,10 @@
         .plan-table { width: 100%; border-collapse: collapse; font-size: 12px; }
         .plan-table th { background: #1f4e79; color: white; }
         .plan-table th, .plan-table td { border: 1px solid #c8d1dc; padding: 7px; vertical-align: top; }
+        .student-report { background: white; page-break-inside: avoid; }
+        .student-report-header { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center; border-bottom: 2px solid #1f4e79; padding-bottom: 10px; margin-bottom: 14px; }
+        .signature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 42px; margin-top: 48px; text-align: center; color: #667085; font-size: 13px; }
+        .signature-line { border-top: 1px solid #344054; padding-top: 7px; }
         @page { size: letter landscape; margin: 0.45in; }
         @media print {
           body { margin: 0; }
@@ -4613,6 +5637,10 @@
     document.getElementById("clearForm").addEventListener("click", resetForm);
     document.getElementById("closePanel").addEventListener("click", closeRequestPanel);
     document.getElementById("closeDayModal").addEventListener("click", closeDayModal);
+    document.getElementById("moduleBackHomeBtn").addEventListener("click", backToProfileSelector);
+    document.getElementById("openRoomModule").addEventListener("click", openRoomModule);
+    document.getElementById("openGradesModule").addEventListener("click", openGradesModule);
+    document.getElementById("backToModulesFromGrades").addEventListener("click", openModuleChooser);
     document.getElementById("openActivityModule").addEventListener("click", openActivityModule);
     document.getElementById("backToCalendarBtn").addEventListener("click", closeActivityModule);
     document.getElementById("saveActivityBtn").addEventListener("click", saveActivityPlan);
@@ -4682,7 +5710,7 @@
     document.getElementById("backBtn").addEventListener("click", () => {
       appView.classList.add("hidden");
       appView.classList.remove("admin-mode", "stats-mode");
-      homeView.classList.remove("hidden");
+      openModuleChooser();
     });
     courseSelect.addEventListener("change", () => updateSubjectOptions());
     subjectSelect.addEventListener("change", updateMaintenanceMode);
