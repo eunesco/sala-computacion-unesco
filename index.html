@@ -659,6 +659,108 @@
       color: #344054;
     }
 
+    .grade-import-card {
+      width: min(920px, calc(100vw - 28px));
+      max-height: calc(100vh - 36px);
+      overflow: auto;
+      border: 1px solid #d9e1ec;
+      border-radius: 10px;
+      background: white;
+      box-shadow: 0 24px 70px rgba(15, 23, 42, 0.38);
+      padding: 18px;
+    }
+
+    .grade-import-card header {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      align-items: start;
+      margin-bottom: 14px;
+    }
+
+    .grade-import-card h2 {
+      margin: 0;
+      font-size: 18px;
+      color: var(--ink);
+    }
+
+    .grade-import-card p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .grade-import-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .grade-import-preview {
+      display: grid;
+      gap: 10px;
+    }
+
+    .grade-import-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 12px;
+    }
+
+    .grade-import-table th {
+      background: var(--blue);
+      color: white;
+      padding: 7px;
+      border: 1px solid #1b4267;
+      text-align: left;
+    }
+
+    .grade-import-table td {
+      padding: 7px;
+      border: 1px solid var(--line);
+      vertical-align: top;
+    }
+
+    .grade-import-table input {
+      width: 50px;
+      padding: 5px;
+      text-align: center;
+    }
+
+    .grade-import-status {
+      border: 1px solid #b8d6f8;
+      background: #eef6ff;
+      border-radius: 8px;
+      padding: 10px 12px;
+      color: #17406c;
+      font-size: 13px;
+    }
+
+    .report-legend {
+      margin: 8px 0 10px;
+      padding: 8px 10px;
+      border: 1px solid #dce3ee;
+      border-radius: 6px;
+      background: #f8fafc;
+      color: #344054;
+      font-size: 12px;
+    }
+
+    .report-grade-cell {
+      min-width: 28px;
+      text-align: center;
+      font-weight: 700;
+    }
+
+    .report-average-cell {
+      text-align: center;
+      font-weight: 900;
+      color: var(--blue);
+      background: #eef6ff;
+    }
+
     .grade-stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -2010,6 +2112,25 @@
     </section>
   </main>
 
+  <div class="modal-overlay" id="gradeImportModal" aria-hidden="true">
+    <section class="grade-import-card" role="dialog" aria-modal="true" aria-labelledby="gradeImportTitle">
+      <header>
+        <div>
+          <h2 id="gradeImportTitle">Revisar notas detectadas</h2>
+          <p id="gradeImportSubtitle">Confirma la propuesta antes de aplicarla a la planilla.</p>
+        </div>
+        <button class="modal-close" type="button" id="closeGradeImportModal" aria-label="Cerrar">&times;</button>
+      </header>
+      <div class="grade-import-preview" id="gradeImportPreview">
+        <div class="grade-import-status">Sube una foto del libro de clases para ver la propuesta.</div>
+      </div>
+      <div class="grade-import-actions">
+        <button type="button" id="cancelGradeImportBtn">Cancelar</button>
+        <button class="primary" type="button" id="applyGradeImportBtn">Aplicar a la planilla</button>
+      </div>
+    </section>
+  </div>
+
   <script>
     const teachers = [
       "Betsy Vega",
@@ -2052,6 +2173,7 @@
     const gradeSlots = 8;
     const smartTemplateThreshold = 3;
     const geminiGenerationEndpoint = "/api/generar-actividad";
+    const gradeImageImportEndpoint = "/api/importar-notas-imagen";
     const geminiGenerationEnabled = true;
     const mathOAsByCourse = {
       "1\u00b0 B\u00e1sico": [
@@ -3200,6 +3322,7 @@
     let gradebookSelectedSubject = "";
     let gradebookSelectedStudentId = "";
     let gradeEditMode = false;
+    let gradeImportProposal = [];
     let selectedDate = "";
     let activeView = "calendar";
     let statsScope = "month";
@@ -3260,6 +3383,9 @@
     const gradebookProfileName = document.getElementById("gradebookProfileName");
     const gradebookTabs = document.getElementById("gradebookTabs");
     const gradebookContent = document.getElementById("gradebookContent");
+    const gradeImportModal = document.getElementById("gradeImportModal");
+    const gradeImportSubtitle = document.getElementById("gradeImportSubtitle");
+    const gradeImportPreview = document.getElementById("gradeImportPreview");
 
     function renderProfiles(filter = "") {
       const term = normalize(filter);
@@ -4822,14 +4948,14 @@
         const entry = entryForStudent(student.id);
         const grades = entry ? entry.grades : [];
         return `
-          <tr data-student-id="${escapeHtml(student.id)}">
+          <tr data-student-id="${escapeHtml(student.id)}" data-row-index="${index}">
             <td>${index + 1}</td>
             <td>
               <div class="student-name">${escapeHtml(studentFullName(student))}</div>
               <div class="saved-meta">${escapeHtml(student.run || "")}</div>
             </td>
             ${Array.from({ length: gradeSlots }, (_, gradeIndex) => `
-              <td><input class="grade-input" data-grade-index="${gradeIndex}" inputmode="numeric" maxlength="2" value="${escapeHtml(grades[gradeIndex] || "")}" ${gradeEditMode ? "" : "disabled"} oninput="validateGradeInput(this)" onblur="updateRowAverage(this.closest('tr'))"></td>
+              <td><input class="grade-input" data-row-index="${index}" data-grade-index="${gradeIndex}" inputmode="numeric" maxlength="2" value="${escapeHtml(grades[gradeIndex] || "")}" ${gradeEditMode ? "" : "disabled"} onkeydown="handleGradeInputKeydown(event)" oninput="validateGradeInput(this)" onblur="updateRowAverage(this.closest('tr'))"></td>
             `).join("")}
             <td class="average-cell">${formatAverage(calculateAverage(grades))}</td>
           </tr>
@@ -4845,6 +4971,7 @@
           <div class="grade-actions">
             <button type="button" onclick="selectGradebookCourse('${escapeJs(gradebookSelectedCourse)}')">Volver a asignaturas</button>
             <button type="button" onclick="toggleGradeEditMode()" class="${gradeEditMode ? "" : "primary"}">${gradeEditMode ? "Bloquear edici&oacute;n" : "Ingresar notas"}</button>
+            <button type="button" onclick="openGradeImageImport()">Subir foto del libro</button>
             <button type="button" onclick="saveGradebookEntries()" class="primary">Guardar planilla</button>
           </div>
         </section>
@@ -4874,6 +5001,226 @@
       gradeEditMode = !gradeEditMode;
       renderTeacherGradebookTable();
     };
+
+    window.handleGradeInputKeydown = function(event) {
+      const navigation = {
+        ArrowRight: [0, 1],
+        ArrowLeft: [0, -1],
+        ArrowDown: [1, 0],
+        Enter: [1, 0],
+        ArrowUp: [-1, 0],
+      };
+      if (!navigation[event.key]) return;
+      const input = event.currentTarget;
+      const rowIndex = Number(input.dataset.rowIndex);
+      const gradeIndex = Number(input.dataset.gradeIndex);
+      const [rowDelta, colDelta] = navigation[event.key];
+      const target = gradebookContent.querySelector(`.grade-input[data-row-index="${rowIndex + rowDelta}"][data-grade-index="${gradeIndex + colDelta}"]`);
+      if (!target || target.disabled) return;
+      event.preventDefault();
+      target.focus();
+      target.select();
+    };
+
+    window.openGradeImageImport = function() {
+      if (!gradebookSelectedCourse || !gradebookSelectedSubject) {
+        alert("Primero abre una planilla de curso y asignatura.");
+        return;
+      }
+      if (!gradeEditMode) {
+        gradeEditMode = true;
+        renderTeacherGradebookTable();
+        setTimeout(() => openGradeImageImport(), 0);
+        return;
+      }
+      const fileInput = document.createElement("input");
+      fileInput.type = "file";
+      fileInput.accept = "image/*";
+      fileInput.onchange = () => {
+        const file = fileInput.files && fileInput.files[0];
+        if (file) importGradesFromImage(file);
+      };
+      fileInput.click();
+    };
+
+    async function importGradesFromImage(file) {
+      const students = sortedStudentsForCourse(gradebookSelectedCourse).map(student => ({
+        id: student.id,
+        name: studentFullName(student),
+        run: student.run || "",
+      }));
+      if (!students.length) {
+        alert("No hay estudiantes cargados para esta planilla.");
+        return;
+      }
+
+      openGradeImportModal("Leyendo foto del libro de clases...", `
+        <div class="grade-import-status">
+          La IA est&aacute; revisando la imagen. Cuando termine ver&aacute;s una propuesta editable antes de aplicarla.
+        </div>
+      `);
+
+      try {
+        const imageDataUrl = await resizeImageFile(file);
+        const response = await fetch(gradeImageImportEndpoint, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            imageDataUrl,
+            course: gradebookSelectedCourse,
+            subject: gradebookSelectedSubject,
+            teacher,
+            gradeSlots,
+            students,
+          }),
+        });
+        const text = await response.text();
+        let data = {};
+        try {
+          data = text ? JSON.parse(text) : {};
+        } catch {
+          throw new Error(response.status === 404
+            ? "No se encontro el lector de fotos en Vercel. Revisa que tambien hayas subido el archivo api/importar-notas-imagen.js."
+            : "El lector de fotos respondio en un formato inesperado. Revisa el despliegue en Vercel.");
+        }
+        if (!response.ok) throw new Error(data.error || "No se pudo leer la imagen.");
+        gradeImportProposal = normalizeGradeImportRows(data.rows || [], students);
+        renderGradeImportPreview(data.summary || "Revisa la propuesta antes de aplicarla.");
+      } catch (error) {
+        openGradeImportModal("No se pudo leer la foto", `
+          <div class="grade-alert">
+            ${escapeHtml(error.message || error)}<br>
+            Puedes intentarlo con una foto m&aacute;s clara, tomada de frente y con buena luz.
+          </div>
+        `);
+      }
+    }
+
+    function resizeImageFile(file) {
+      return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onerror = () => reject(new Error("No se pudo abrir la imagen."));
+        reader.onload = () => {
+          const image = new Image();
+          image.onerror = () => reject(new Error("La imagen no se pudo procesar."));
+          image.onload = () => {
+            const maxSide = 1200;
+            const scale = Math.min(1, maxSide / Math.max(image.width, image.height));
+            const canvas = document.createElement("canvas");
+            canvas.width = Math.round(image.width * scale);
+            canvas.height = Math.round(image.height * scale);
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+            resolve(canvas.toDataURL("image/jpeg", 0.72));
+          };
+          image.src = reader.result;
+        };
+        reader.readAsDataURL(file);
+      });
+    }
+
+    function normalizeGradeImportRows(rows, students) {
+      const byId = new Map(students.map(student => [student.id, student]));
+      const byName = new Map(students.map(student => [normalize(student.name), student]));
+      return (rows || []).map(row => {
+        const found = byId.get(row.studentId) || byName.get(normalize(row.studentName || ""));
+        const grades = Array.from({ length: gradeSlots }, (_, index) => {
+          const value = Array.isArray(row.grades) ? row.grades[index] : "";
+          const number = Number(value);
+          return Number.isInteger(number) && number >= 10 && number <= 70 ? number : "";
+        });
+        return {
+          studentId: found ? found.id : "",
+          studentName: found ? found.name : (row.studentName || "Estudiante no identificado"),
+          detectedName: row.studentName || "",
+          grades,
+          confidence: Math.max(0, Math.min(100, Math.round(Number(row.confidence || 0)))),
+          notes: row.notes || "",
+        };
+      }).filter(row => row.studentId || row.grades.some(Boolean));
+    }
+
+    function openGradeImportModal(subtitle, html) {
+      gradeImportSubtitle.textContent = subtitle;
+      gradeImportPreview.innerHTML = html;
+      gradeImportModal.classList.add("active");
+      gradeImportModal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeGradeImportModal() {
+      gradeImportModal.classList.remove("active");
+      gradeImportModal.setAttribute("aria-hidden", "true");
+    }
+
+    function renderGradeImportPreview(summary) {
+      if (!gradeImportProposal.length) {
+        openGradeImportModal("La IA no encontr&oacute; notas aplicables", `
+          <div class="grade-alert">
+            No se detectaron notas asociadas a la lista del curso. Prueba con una foto m&aacute;s cercana o m&aacute;s n&iacute;tida.
+          </div>
+        `);
+        return;
+      }
+      const rows = gradeImportProposal.map((row, rowIndex) => `
+        <tr data-import-row="${rowIndex}">
+          <td>
+            <strong>${escapeHtml(row.studentName)}</strong>
+            ${row.detectedName && row.detectedName !== row.studentName ? `<div class="saved-meta">Detectado como: ${escapeHtml(row.detectedName)}</div>` : ""}
+            ${row.notes ? `<div class="saved-meta">${escapeHtml(row.notes)}</div>` : ""}
+          </td>
+          ${Array.from({ length: gradeSlots }, (_, gradeIndex) => `
+            <td><input data-import-grade="${gradeIndex}" inputmode="numeric" maxlength="2" value="${escapeHtml(row.grades[gradeIndex] || "")}" oninput="validateImportGradeInput(this)"></td>
+          `).join("")}
+          <td>${row.confidence ? `${row.confidence}%` : "Revisar"}</td>
+        </tr>
+      `).join("");
+      openGradeImportModal(summary, `
+        <div class="grade-import-status">
+          La propuesta no se guardar&aacute; autom&aacute;ticamente. Rev&iacute;sala, aplica las notas a la planilla y luego presiona <strong>Guardar planilla</strong>.
+        </div>
+        <table class="grade-import-table">
+          <thead>
+            <tr>
+              <th>Estudiante</th>
+              ${Array.from({ length: gradeSlots }, (_, index) => `<th>N${index + 1}</th>`).join("")}
+              <th>Confianza</th>
+            </tr>
+          </thead>
+          <tbody>${rows}</tbody>
+        </table>
+      `);
+    }
+
+    window.validateImportGradeInput = function(input) {
+      const original = input.value;
+      if (/[.,]/.test(original)) alert("Las notas no pueden llevar decimales.");
+      input.value = original.replace(/[.,].*$/, "").replace(/\D/g, "").slice(0, 2);
+      const grade = Number(input.value);
+      if (input.value && input.value.length >= 2 && (grade < 10 || grade > 70)) {
+        alert("La nota debe estar entre 10 y 70.");
+        input.value = "";
+      }
+    };
+
+    function applyGradeImportProposal() {
+      const rows = [...gradeImportPreview.querySelectorAll("tr[data-import-row]")];
+      rows.forEach(row => {
+        const proposal = gradeImportProposal[Number(row.dataset.importRow)];
+        if (!proposal || !proposal.studentId) return;
+        row.querySelectorAll("input[data-import-grade]").forEach(input => {
+          const value = input.value.trim();
+          if (!value) return;
+          const target = gradebookContent.querySelector(`tr[data-student-id="${escapeCss(proposal.studentId)}"] .grade-input[data-grade-index="${input.dataset.importGrade}"]`);
+          if (target && !target.disabled) {
+            target.value = value;
+            validateGradeInput(target);
+          }
+        });
+        updateRowAverage(gradebookContent.querySelector(`tr[data-student-id="${escapeCss(proposal.studentId)}"]`));
+      });
+      closeGradeImportModal();
+      alert("Notas aplicadas a la planilla. Revisa los datos y presiona Guardar planilla para dejarlas registradas.");
+    }
 
     window.validateGradeInput = function(input) {
       const original = input.value;
@@ -5093,14 +5440,18 @@
       const rows = gradebookEntries
         .filter(entry => entry.studentId === student.id && entry.course === student.course)
         .sort((a, b) => a.subject.localeCompare(b.subject, "es"))
-        .map(entry => `
-          <tr>
-            <td>${escapeHtml(entry.subject)}</td>
-            <td>${escapeHtml(entry.teacher)}</td>
-            <td>${entry.grades.filter(Boolean).map(escapeHtml).join(" - ") || "Sin notas"}</td>
-            <td><strong>${formatAverage(entry.average)}</strong></td>
-          </tr>
-        `).join("");
+        .map(entry => {
+          const studentAverage = entry.average || calculateAverage(entry.grades);
+          const courseAverage = courseSubjectAverage(entry.course, entry.subject);
+          return `
+            <tr>
+              <td>${escapeHtml(entry.subject)}</td>
+              ${Array.from({ length: gradeSlots }, (_, index) => `<td class="report-grade-cell">${escapeHtml(entry.grades[index] || "")}</td>`).join("")}
+              <td class="report-average-cell">${formatAverage(courseAverage)}</td>
+              <td class="report-average-cell">${formatAverage(studentAverage)}</td>
+            </tr>
+          `;
+        }).join("");
       return `
         <article class="student-report">
           <header class="student-report-header">
@@ -5116,9 +5467,19 @@
             <div><strong>Asistencia:</strong> ${attendance || attendance === 0 ? `${attendance}%` : "Sin registrar"}</div>
             <div><strong>Fecha:</strong> ${new Date().toLocaleDateString("es-CL")}</div>
           </div>
+          <div class="report-legend">
+            <strong>Simbolog&iacute;a:</strong> PC = Promedio del curso en la asignatura | PA = Promedio del alumno/a en la asignatura.
+          </div>
           <table class="plan-table">
-            <thead><tr><th>Asignatura</th><th>Profesor/a</th><th>Notas</th><th>Promedio</th></tr></thead>
-            <tbody>${rows || `<tr><td colspan="4">Sin notas registradas.</td></tr>`}</tbody>
+            <thead>
+              <tr>
+                <th>Asignatura</th>
+                ${Array.from({ length: gradeSlots }, (_, index) => `<th>N${index + 1}</th>`).join("")}
+                <th>PC</th>
+                <th>PA</th>
+              </tr>
+            </thead>
+            <tbody>${rows || `<tr><td colspan="${gradeSlots + 3}">Sin notas registradas.</td></tr>`}</tbody>
           </table>
           <footer class="signature-row">
             <div class="signature-line">Firma Director/a</div>
@@ -5126,6 +5487,16 @@
           </footer>
         </article>
       `;
+    }
+
+    function courseSubjectAverage(course, subject) {
+      const values = gradebookEntries
+        .filter(entry => entry.course === course && entry.subject === subject)
+        .map(entry => entry.average || calculateAverage(entry.grades))
+        .filter(value => Number.isInteger(Number(value)) && Number(value) >= 10 && Number(value) <= 70)
+        .map(Number);
+      if (!values.length) return null;
+      return Math.round(values.reduce((sum, value) => sum + value, 0) / values.length);
     }
 
     function attendanceForStudent(studentId, course) {
@@ -5281,6 +5652,9 @@
         .plan-table th, .plan-table td { border: 1px solid #c8d1dc; padding: 7px; vertical-align: top; }
         .student-report { background: white; page-break-inside: avoid; }
         .student-report-header { display: grid; grid-template-columns: auto 1fr; gap: 12px; align-items: center; border-bottom: 2px solid #1f4e79; padding-bottom: 10px; margin-bottom: 14px; }
+        .report-legend { margin: 8px 0 10px; padding: 8px 10px; border: 1px solid #dce3ee; border-radius: 6px; background: #f8fafc; color: #344054; font-size: 12px; }
+        .report-grade-cell { min-width: 28px; text-align: center; font-weight: 700; }
+        .report-average-cell { text-align: center; font-weight: 900; color: #1f4e79; background: #eef6ff; }
         .signature-row { display: grid; grid-template-columns: 1fr 1fr; gap: 42px; margin-top: 48px; text-align: center; color: #667085; font-size: 13px; }
         .signature-line { border-top: 1px solid #344054; padding-top: 7px; }
         @page { size: letter landscape; margin: 0.45in; }
@@ -5647,6 +6021,12 @@
     document.getElementById("openRoomModule").addEventListener("click", openRoomModule);
     document.getElementById("openGradesModule").addEventListener("click", openGradesModule);
     document.getElementById("backToModulesFromGrades").addEventListener("click", openModuleChooser);
+    document.getElementById("closeGradeImportModal").addEventListener("click", closeGradeImportModal);
+    document.getElementById("cancelGradeImportBtn").addEventListener("click", closeGradeImportModal);
+    document.getElementById("applyGradeImportBtn").addEventListener("click", applyGradeImportProposal);
+    gradeImportModal.addEventListener("click", event => {
+      if (event.target === gradeImportModal) closeGradeImportModal();
+    });
     document.getElementById("openActivityModule").addEventListener("click", openActivityModule);
     document.getElementById("backToCalendarBtn").addEventListener("click", closeActivityModule);
     document.getElementById("saveActivityBtn").addEventListener("click", saveActivityPlan);
@@ -5946,6 +6326,11 @@
 
     function escapeJs(value) {
       return String(value ?? "").replaceAll("\\", "\\\\").replaceAll("'", "\\'");
+    }
+
+    function escapeCss(value) {
+      if (window.CSS && typeof CSS.escape === "function") return CSS.escape(String(value ?? ""));
+      return String(value ?? "").replace(/["\\]/g, "\\$&");
     }
 
     fillMonthSelect();
