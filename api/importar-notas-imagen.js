@@ -1,5 +1,11 @@
 const GEMINI_ENDPOINT = "https://generativelanguage.googleapis.com/v1beta/models";
 
+function setCorsHeaders(res) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+}
+
 function cleanJsonText(text) {
   return String(text || "")
     .replace(/^```json\s*/i, "")
@@ -62,6 +68,11 @@ Devuelve SOLO un JSON valido, sin markdown, con esta forma:
 }
 
 module.exports = async function handler(req, res) {
+  setCorsHeaders(res);
+  if (req.method === "OPTIONS") {
+    return res.status(204).end();
+  }
+
   if (req.method !== "POST") {
     res.setHeader("Allow", "POST");
     return res.status(405).json({ error: "Metodo no permitido." });

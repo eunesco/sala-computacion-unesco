@@ -2173,6 +2173,7 @@
     const gradeSlots = 8;
     const smartTemplateThreshold = 3;
     const geminiGenerationEndpoint = "/api/generar-actividad";
+    const productionAppUrl = "https://sala-computacion-unesco.vercel.app";
     const gradeImageImportEndpoint = "/api/importar-notas-imagen";
     const geminiGenerationEnabled = true;
     const mathOAsByCourse = {
@@ -5062,7 +5063,7 @@
 
       try {
         const imageDataUrl = await resizeImageFile(file);
-        const response = await fetch(gradeImageImportEndpoint, {
+        const response = await fetch(resolveApiEndpoint(gradeImageImportEndpoint), {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
@@ -5117,6 +5118,11 @@
         };
         reader.readAsDataURL(file);
       });
+    }
+
+    function resolveApiEndpoint(path) {
+      if (window.location.protocol === "file:") return `${productionAppUrl}${path}`;
+      return path;
     }
 
     function normalizeGradeImportRows(rows, students) {
