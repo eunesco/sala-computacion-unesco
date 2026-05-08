@@ -471,6 +471,19 @@
       justify-self: end;
     }
 
+    .module-card.compact {
+      min-height: 104px;
+      grid-template-columns: auto 1fr auto;
+      grid-template-rows: auto;
+      align-items: center;
+    }
+
+    .quick-tools {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+      gap: 10px;
+    }
+
     .profile-calendar {
       border: 1px solid #dce3ee;
       border-radius: 12px;
@@ -519,6 +532,72 @@
       padding: 12px 16px 16px;
       max-height: 360px;
       overflow: auto;
+    }
+
+    .school-event-list.month {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 0;
+      border-top: 1px solid #e5edf5;
+      padding: 0;
+      max-height: none;
+    }
+
+    .school-week-head,
+    .school-month-cell {
+      border-right: 1px solid #e5edf5;
+      border-bottom: 1px solid #e5edf5;
+      min-height: 122px;
+      padding: 8px;
+      background: #fff;
+    }
+
+    .school-week-head {
+      min-height: auto;
+      background: #f8fafc;
+      color: #475467;
+      font-size: 11px;
+      font-weight: 900;
+      text-align: center;
+      text-transform: uppercase;
+    }
+
+    .school-month-cell.today {
+      outline: 2px solid #a9c5e8;
+      outline-offset: -2px;
+      background: #f8fbff;
+    }
+
+    .school-month-day {
+      font-weight: 900;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+
+    .school-month-event {
+      margin: 4px 0;
+      padding: 3px 5px;
+      border-radius: 4px;
+      border: 1px solid color-mix(in srgb, var(--tag, var(--blue)) 50%, white);
+      background: color-mix(in srgb, var(--tag, var(--blue)) 16%, white);
+      font-size: 11px;
+      line-height: 1.2;
+    }
+
+    .school-event-suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+    }
+
+    .suggestion-chip {
+      border: 1px solid #c8d1dc;
+      border-radius: 999px;
+      background: #f8fafc;
+      color: #344054;
+      padding: 5px 8px;
+      font-size: 11px;
+      font-weight: 800;
     }
 
     .school-event {
@@ -787,13 +866,16 @@
     }
 
     .grade-input {
-      width: 58px;
-      padding: 6px;
+      width: 62px;
+      min-height: 38px;
+      padding: 8px 6px;
       text-align: center;
       border: 1px solid #98b9d7;
       border-radius: 5px;
       background: #f7fbff;
       font-size: 13px;
+      font-weight: 800;
+      touch-action: manipulation;
     }
 
     .grade-input:disabled {
@@ -1600,10 +1682,10 @@
     .event {
       margin-top: 4px;
       padding: 2px 5px;
-      border: 1px solid #b8d6f8;
+      border: 1px solid #9bd6ad;
       border-radius: 3px;
-      background: #dcecff;
-      color: #17406c;
+      background: #dcf5e3;
+      color: #14532d;
       line-height: 1.2;
       font-size: 10px;
       white-space: nowrap;
@@ -1637,6 +1719,99 @@
 
     .stats-view.active {
       display: block;
+    }
+
+    .group-view {
+      min-height: 100vh;
+      background: var(--soft);
+      padding: 8px;
+    }
+
+    .group-shell {
+      min-height: calc(100vh - 16px);
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 22px rgba(31, 41, 55, 0.08);
+      display: grid;
+      grid-template-rows: auto 1fr;
+    }
+
+    .group-content {
+      display: grid;
+      grid-template-columns: minmax(260px, 340px) 1fr;
+      gap: 14px;
+      padding: 14px;
+    }
+
+    .group-panel,
+    .group-stage {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcfe;
+      padding: 14px;
+    }
+
+    .student-checks {
+      max-height: 320px;
+      overflow: auto;
+      display: grid;
+      gap: 6px;
+      margin-top: 8px;
+    }
+
+    .student-checks label {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      font-size: 13px;
+    }
+
+    .group-animation {
+      min-height: 210px;
+      border: 1px dashed #b9c6d8;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #f8fbff, #eef7f0);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 14px;
+    }
+
+    .runner {
+      position: absolute;
+      width: 34px;
+      height: 34px;
+      border-radius: 999px;
+      display: grid;
+      place-items: center;
+      color: white;
+      font-weight: 900;
+      background: var(--blue);
+      animation: runAround 1.7s ease-in-out infinite alternate;
+    }
+
+    @keyframes runAround {
+      from { transform: translateX(-12px) translateY(0); }
+      to { transform: translateX(42px) translateY(12px); }
+    }
+
+    .generated-groups {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 10px;
+    }
+
+    .group-card {
+      border: 1px solid #dce3ee;
+      border-radius: 8px;
+      background: white;
+      padding: 12px;
+    }
+
+    .group-card h3 {
+      margin: 0 0 8px;
+      color: var(--blue);
     }
 
     .stats-grid {
@@ -2084,12 +2259,46 @@
         </div>
         <button class="back" type="button" id="moduleBackHomeBtn">Cambiar perfil</button>
       </section>
+      <section class="quick-tools" aria-label="Herramientas r&aacute;pidas">
+        <button class="module-card compact" type="button" id="openActivityFromProfileBtn">
+          <span class="module-icon">IA</span>
+          <span>
+            <h3>Generador sala de computaci&oacute;n</h3>
+            <p>Planificaciones y recursos para actividades digitales.</p>
+          </span>
+          <span class="arrow">&rsaquo;</span>
+        </button>
+        <button class="module-card compact" type="button" id="openCraActivityBtn">
+          <span class="module-icon">CRA</span>
+          <span>
+            <h3>Generador sala CRA</h3>
+            <p>Actividades de lectura, investigaci&oacute;n y uso de biblioteca.</p>
+          </span>
+          <span class="arrow">&rsaquo;</span>
+        </button>
+        <button class="module-card compact" type="button" id="openRandomGroupsBtn">
+          <span class="module-icon">GR</span>
+          <span>
+            <h3>Generador de grupos al azar</h3>
+            <p>Forma equipos desde estudiantes activos por curso.</p>
+          </span>
+          <span class="arrow">&rsaquo;</span>
+        </button>
+      </section>
       <section class="module-grid" aria-label="M&oacute;dulos disponibles">
         <button class="module-card" type="button" id="openRoomModule">
           <span class="module-icon">PC</span>
           <span>
             <h3>Solicitud de sala de computaci&oacute;n</h3>
             <p>Reserva horarios, revisa disponibilidad y consulta estad&iacute;sticas de uso.</p>
+          </span>
+          <span class="arrow">&rsaquo;</span>
+        </button>
+        <button class="module-card" type="button" id="openCraRoomModule">
+          <span class="module-icon">CRA</span>
+          <span>
+            <h3>Solicitud de sala CRA</h3>
+            <p>Reserva el espacio CRA/biblioteca con el mismo sistema de calendario y horarios.</p>
           </span>
           <span class="arrow">&rsaquo;</span>
         </button>
@@ -2111,6 +2320,9 @@
           <div class="profile-calendar-actions">
             <button type="button" id="myEventsBtn">Mis eventos</button>
             <button type="button" id="allEventsBtn">Todos</button>
+            <button type="button" id="eventListViewBtn">Lista</button>
+            <button type="button" id="eventWeekViewBtn">Semana</button>
+            <button type="button" id="eventMonthViewBtn">Mes</button>
             <button type="button" id="colorGuideBtn">Colores</button>
             <button type="button" id="newSchoolEventBtn">Agregar evento UTP</button>
           </div>
@@ -2378,6 +2590,55 @@
     </section>
   </main>
 
+  <main class="group-view hidden" id="randomGroupsView">
+    <section class="group-shell">
+      <header class="grade-top">
+        <svg class="small-logo" viewBox="0 0 100 100" role="img" aria-label="Logo Escuela Unesco">
+          <polygon points="50,5 88,25 88,75 50,95 12,75 12,25" fill="#f4d76f" />
+          <polygon points="50,12 81,29 81,71 50,88 19,71 19,29" fill="#7280d4" />
+          <polygon points="50,20 73,33 73,67 50,80 27,67 27,33" fill="#ffffff" opacity="0.25" />
+          <text x="50" y="43" text-anchor="middle" font-family="Arial" font-size="16" font-weight="700" fill="#ffffff">UNESCO</text>
+          <line x1="31" y1="48" x2="69" y2="48" stroke="#ffffff" stroke-width="2" />
+          <text x="50" y="62" text-anchor="middle" font-family="Arial" font-size="8" fill="#ffffff">VI&Ntilde;A DEL MAR</text>
+        </svg>
+        <div>
+          <div class="school-name">Escuela Unesco</div>
+          <div class="school-motto">Generador de grupos al azar</div>
+        </div>
+        <div class="profile-name">
+          <div id="groupsProfileName">Perfil docente</div>
+          <button class="back" type="button" id="backToModulesFromGroups">Volver a opciones</button>
+        </div>
+      </header>
+      <section class="group-content">
+        <aside class="group-panel">
+          <h2>Configuraci&oacute;n</h2>
+          <label for="groupsCourse">Curso</label>
+          <select id="groupsCourse"></select>
+          <label for="groupSize">Integrantes por grupo</label>
+          <select id="groupSize">
+            <option value="2">2 integrantes</option>
+            <option value="3">3 integrantes</option>
+            <option value="4">4 integrantes</option>
+            <option value="5">5 integrantes</option>
+          </select>
+          <div class="notice" style="margin-top:10px;">Marca como ausentes a quienes no participar&aacute;n.</div>
+          <div class="student-checks" id="groupStudentList"></div>
+          <div class="actions" style="margin-top:12px;">
+            <button class="primary" type="button" id="startGroupsBtn">Comenzar</button>
+            <button type="button" id="clearGroupsBtn">Limpiar</button>
+          </div>
+        </aside>
+        <section class="group-stage">
+          <div class="group-animation" id="groupAnimation">
+            <div class="notice" style="margin:14px;">Selecciona curso, saca ausentes y presiona comenzar.</div>
+          </div>
+          <div class="generated-groups" id="generatedGroups"></div>
+        </section>
+      </section>
+    </section>
+  </main>
+
   <div class="modal-overlay" id="gradeImportModal" aria-hidden="true">
     <section class="grade-import-card" role="dialog" aria-modal="true" aria-labelledby="gradeImportTitle">
       <header>
@@ -2457,7 +2718,9 @@
         </div>
         <div class="wide">
           <label for="schoolEventParticipants">Participantes</label>
-          <input id="schoolEventParticipants" placeholder="Ej: Todos, Paulo Montoya, Equipo PIE, 5° Básico">
+          <input id="schoolEventParticipants" list="schoolEventParticipantOptions" placeholder="Ej: Todos, Paulo Montoya, Equipo PIE, 5° Básico">
+          <datalist id="schoolEventParticipantOptions"></datalist>
+          <div class="school-event-suggestions" id="schoolEventSuggestionChips"></div>
         </div>
         <div class="wide">
           <label for="schoolEventDescription">Descripci&oacute;n breve</label>
@@ -2533,6 +2796,26 @@
       { name: "Feriado / celebraci\u00f3n", color: "#94a3b8" },
       { name: "General", color: "#6b7280" },
     ];
+    const courseHeadTeachers = {
+      "1\u00b0 B\u00e1sico": "Javiera Ossandon",
+      "2\u00b0 B\u00e1sico": "Jazm\u00edn Estefan\u00eda",
+      "3\u00b0 B\u00e1sico": "Marisol",
+      "4\u00b0 B\u00e1sico": "Betsy Vega",
+      "5\u00b0 B\u00e1sico": "Cristian Lepe",
+      "6\u00b0 B\u00e1sico": "Jos\u00e9 \u00c1lvarez",
+      "7\u00b0 B\u00e1sico": "Roc\u00edo Molina",
+      "8\u00b0 B\u00e1sico": "Mayra Jofr\u00e9",
+    };
+    const schoolEventGroups = {
+      "Todos": ["Todos"],
+      "Todos los docentes": ["Todos los docentes"],
+      "Equipo de gesti\u00f3n": ["Equipo de gesti\u00f3n"],
+      "Equipo directivo": ["Equipo directivo"],
+      "Equipo PIE": ["Equipo PIE"],
+      "Pre b\u00e1sica": ["Pre k\u00ednder", "K\u00ednder"],
+      "Asistentes de la educaci\u00f3n": ["Asistentes de la educaci\u00f3n"],
+      "Profesoras/es jefe": Object.values(courseHeadTeachers),
+    };
     const mathOAsByCourse = {
       "1\u00b0 B\u00e1sico": [
         "OA 1: N\u00fameros hasta 20",
@@ -3671,10 +3954,12 @@
     let requests = [];
     let schoolEvents = [];
     let schoolEventScope = "mine";
+    let schoolEventView = "list";
     let savedActivityPlans = [];
     let currentActivityPlan = null;
     let currentActivityRating = 0;
     let currentActivityDocumentView = "plan";
+    let activityContext = "computacion";
     let gradebookStudents = [];
     let gradebookEntries = [];
     let gradebookAttendance = [];
@@ -3685,6 +3970,7 @@
     let gradeImportProposal = [];
     let selectedDate = "";
     let activeView = "calendar";
+    let activeRoom = "computacion";
     let statsScope = "month";
     const monthPreferenceKey = "sala-computacion-visible-month";
     const initialMonth = getInitialVisibleMonth();
@@ -3696,6 +3982,7 @@
     const appView = document.getElementById("appView");
     const activityView = document.getElementById("activityView");
     const gradebookView = document.getElementById("gradebookView");
+    const randomGroupsView = document.getElementById("randomGroupsView");
     const grid = document.getElementById("profileGrid");
     const search = document.getElementById("search");
     const calendarBody = document.getElementById("calendarBody");
@@ -3753,6 +4040,12 @@
     const schoolEventModal = document.getElementById("schoolEventModal");
     const schoolEventForm = document.getElementById("schoolEventForm");
     const schoolEventCategory = document.getElementById("schoolEventCategory");
+    const groupsProfileName = document.getElementById("groupsProfileName");
+    const groupsCourse = document.getElementById("groupsCourse");
+    const groupSize = document.getElementById("groupSize");
+    const groupStudentList = document.getElementById("groupStudentList");
+    const groupAnimation = document.getElementById("groupAnimation");
+    const generatedGroups = document.getElementById("generatedGroups");
 
     function renderProfiles(filter = "") {
       const term = normalize(filter);
@@ -3789,6 +4082,7 @@
       appView.classList.add("hidden");
       activityView.classList.add("hidden");
       gradebookView.classList.add("hidden");
+      randomGroupsView.classList.add("hidden");
       teacherInput.value = teacher;
       profileName.textContent = teacher;
       activityProfileName.textContent = teacher;
@@ -3801,6 +4095,7 @@
       document.getElementById("openActivityModule").classList.toggle("hidden", isInspectorProfile());
       document.getElementById("newSchoolEventBtn").classList.toggle("hidden", !isAdminProfile());
       schoolEventScope = "mine";
+      schoolEventView = "list";
       fillSchoolEventCategoryOptions();
       renderColorGuide();
       renderProfileCalendar();
@@ -3815,6 +4110,7 @@
       appView.classList.add("hidden");
       activityView.classList.add("hidden");
       gradebookView.classList.add("hidden");
+      randomGroupsView.classList.add("hidden");
       moduleChooserView.classList.remove("hidden");
     }
 
@@ -3824,14 +4120,17 @@
       appView.classList.add("hidden");
       activityView.classList.add("hidden");
       gradebookView.classList.add("hidden");
+      randomGroupsView.classList.add("hidden");
       appView.classList.remove("admin-mode", "stats-mode");
       homeView.classList.remove("hidden");
     }
 
-    function openRoomModule() {
+    function openRoomModule(room = "computacion") {
+      activeRoom = room === "cra" ? "cra" : "computacion";
       moduleChooserView.classList.add("hidden");
       gradebookView.classList.add("hidden");
       activityView.classList.add("hidden");
+      randomGroupsView.classList.add("hidden");
       appView.classList.remove("hidden");
       teacherInput.value = teacher;
       profileName.textContent = teacher;
@@ -3850,6 +4149,7 @@
       moduleChooserView.classList.add("hidden");
       appView.classList.add("hidden");
       activityView.classList.add("hidden");
+      randomGroupsView.classList.add("hidden");
       gradebookView.classList.remove("hidden");
       gradebookProfileName.textContent = teacher;
       gradebookSelectedCourse = "";
@@ -3901,18 +4201,65 @@
       if (!profileCalendarList) return;
       document.getElementById("myEventsBtn").classList.toggle("active", schoolEventScope === "mine");
       document.getElementById("allEventsBtn").classList.toggle("active", schoolEventScope === "all");
+      document.getElementById("eventListViewBtn").classList.toggle("active", schoolEventView === "list");
+      document.getElementById("eventWeekViewBtn").classList.toggle("active", schoolEventView === "week");
+      document.getElementById("eventMonthViewBtn").classList.toggle("active", schoolEventView === "month");
       const items = schoolEvents
         .filter(event => schoolEventScope === "all" || eventBelongsToProfile(event, teacher))
-        .filter(event => new Date(`${event.date}T00:00:00`) >= startOfToday())
-        .slice(0, 24);
+        .filter(event => schoolEventView === "list" ? new Date(`${event.date}T00:00:00`) >= startOfToday() : true);
       profileCalendarSubtitle.textContent = schoolEventScope === "all"
         ? "Vista con todos los eventos institucionales pr\u00f3ximos."
         : "Vista personal: eventos donde participa tu perfil, tu curso o todos los docentes.";
-      profileCalendarList.innerHTML = items.length ? items.map(schoolEventHtml).join("") : `
+      profileCalendarList.classList.toggle("month", schoolEventView !== "list");
+      if (schoolEventView === "week") {
+        profileCalendarList.innerHTML = renderSchoolEventGrid(items, "week");
+        return;
+      }
+      if (schoolEventView === "month") {
+        profileCalendarList.innerHTML = renderSchoolEventGrid(items, "month");
+        return;
+      }
+      const listItems = items.slice(0, 24);
+      profileCalendarList.innerHTML = listItems.length ? listItems.map(schoolEventHtml).join("") : `
         <div class="notice">
           ${schoolEventScope === "all" ? "No hay eventos cargados." : "No hay eventos personales pr\u00f3ximos. Puedes cambiar a la vista Todos."}
         </div>
       `;
+    }
+
+    function renderSchoolEventGrid(items, mode) {
+      const today = startOfToday();
+      const start = new Date(today);
+      start.setDate(today.getDate() - ((today.getDay() + 6) % 7));
+      const end = new Date(start);
+      end.setDate(start.getDate() + (mode === "week" ? 4 : 34));
+      const days = [];
+      for (const cursor = new Date(start); cursor <= end; cursor.setDate(cursor.getDate() + 1)) {
+        if (cursor.getDay() === 0 || cursor.getDay() === 6) continue;
+        days.push(new Date(cursor));
+      }
+      const headers = ["Lun", "Mar", "Mi\u00e9", "Jue", "Vie"].map(day => `<div class="school-week-head">${day}</div>`).join("");
+      const cells = days.map(day => {
+        const date = `${String(day.getDate()).padStart(2, "0")}-${String(day.getMonth() + 1).padStart(2, "0")}-${day.getFullYear()}`;
+        const iso = `${day.getFullYear()}-${String(day.getMonth() + 1).padStart(2, "0")}-${String(day.getDate()).padStart(2, "0")}`;
+        const dayItems = items
+          .filter(event => event.date === iso)
+          .sort((a, b) => String(a.start).localeCompare(String(b.start)));
+        return `
+          <div class="school-month-cell ${sameLocalDate(day, today) ? "today" : ""}">
+            <div class="school-month-day">${day.getDate()} <span>${monthNames[day.getMonth()].slice(0, 3)}</span></div>
+            ${dayItems.map(event => {
+              const color = colorForSchoolEvent(event.category);
+              return `<div class="school-month-event" style="--tag:${color}"><strong>${escapeHtml(event.start || "")}</strong> ${escapeHtml(event.title)}</div>`;
+            }).join("")}
+          </div>
+        `;
+      }).join("");
+      return headers + cells;
+    }
+
+    function sameLocalDate(a, b) {
+      return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
     }
 
     function startOfToday() {
@@ -3926,14 +4273,16 @@
       const terms = [
         ...event.participants,
         ...event.teachers,
-        ...event.courses,
         event.responsible,
         event.description,
         event.title,
       ].map(normalize);
       const profile = normalize(name);
       if (terms.some(term => term === "todos" || term.includes("todos los docentes") || term.includes(profile))) return true;
-      return coursesForTeacher(name).some(course => terms.some(term => term.includes(normalize(course))));
+      if (normalize(event.category).includes("reunion integral")) return false;
+      const courseTerms = (event.courses || []).map(normalize);
+      if (courseTerms.some(term => term.includes(profile))) return true;
+      return coursesForTeacher(name).some(course => courseTerms.some(term => term.includes(normalize(course))));
     }
 
     function schoolEventHtml(event) {
@@ -4021,6 +4370,48 @@
       schoolEventCategory.innerHTML = schoolEventCategories
         .map(item => `<option value="${escapeHtml(item.name)}">${escapeHtml(item.name)}</option>`)
         .join("");
+      const suggestions = [...new Set([
+        ...Object.keys(schoolEventGroups),
+        ...teachers,
+        ...courses,
+        ...Object.values(courseHeadTeachers),
+      ])].filter(Boolean);
+      document.getElementById("schoolEventParticipantOptions").innerHTML = suggestions
+        .map(item => `<option value="${escapeHtml(item)}"></option>`)
+        .join("");
+      document.getElementById("schoolEventSuggestionChips").innerHTML = Object.keys(schoolEventGroups)
+        .slice(0, 8)
+        .map(item => `<button class="suggestion-chip" type="button" onclick="addSchoolEventParticipant('${escapeJs(item)}')">${escapeHtml(item)}</button>`)
+        .join("");
+    }
+
+    window.addSchoolEventParticipant = function(value) {
+      const input = document.getElementById("schoolEventParticipants");
+      const current = splitEventList(input.value);
+      if (!current.includes(value)) current.push(value);
+      input.value = current.join(", ");
+      input.focus();
+    };
+
+    function expandSchoolEventParticipants(items) {
+      return [...new Set(items.flatMap(item => schoolEventGroups[item] || [item]))].filter(Boolean);
+    }
+
+    function teachersFromParticipants(items, category) {
+      const expanded = expandSchoolEventParticipants(items);
+      const explicitTeachers = expanded.filter(item => teachers.includes(item));
+      const headTeacherMatches = [];
+      if (normalize(category).includes("reunion integral")) {
+        expanded.forEach(item => {
+          const course = normalizeCourseLabel(item);
+          if (course && courseHeadTeachers[course]) headTeacherMatches.push(courseHeadTeachers[course]);
+        });
+      }
+      return [...new Set([...explicitTeachers, ...headTeacherMatches])].filter(Boolean);
+    }
+
+    function coursesFromParticipants(items) {
+      return [...new Set(expandSchoolEventParticipants(items).map(normalizeCourseLabel).filter(Boolean))];
     }
 
     function splitEventList(value) {
@@ -4033,19 +4424,21 @@
     async function saveSchoolEvent(event) {
       event.preventDefault();
       if (!isAdminProfile()) return;
-      const participants = splitEventList(document.getElementById("schoolEventParticipants").value);
+      const rawParticipants = splitEventList(document.getElementById("schoolEventParticipants").value);
+      const participants = expandSchoolEventParticipants(rawParticipants.length ? rawParticipants : ["Todos"]);
+      const title = toFormalTitle(document.getElementById("schoolEventTitleInput").value.trim());
       const body = {
         fecha: document.getElementById("schoolEventDate").value,
         hora_inicio: document.getElementById("schoolEventStart").value || null,
         hora_termino: document.getElementById("schoolEventEnd").value || null,
-        titulo: document.getElementById("schoolEventTitleInput").value.trim(),
+        titulo: title,
         categoria: schoolEventCategory.value,
         lugar: document.getElementById("schoolEventPlace").value.trim() || "Escuela",
         responsable: "U.T.P",
-        participantes: participants.length ? participants : ["Todos"],
-        cursos: participants.filter(item => gradeFromCourse(item) >= 1),
-        docentes: participants.filter(item => teachers.includes(item)),
-        descripcion: document.getElementById("schoolEventDescription").value.trim(),
+        participantes: participants,
+        cursos: coursesFromParticipants(participants),
+        docentes: teachersFromParticipants(participants, schoolEventCategory.value),
+        descripcion: toFormalTitle(document.getElementById("schoolEventDescription").value.trim()),
         visibilidad: "todos",
         prioridad: document.getElementById("schoolEventPriority").value,
         estado: "activo",
@@ -4075,8 +4468,8 @@
       statusHint.textContent = "Cargando solicitudes...";
       try {
         const data = await supabaseRequest(`${supabaseTable}?select=*&estado=eq.activo&order=fecha.asc,horario.asc`);
-        requests = (data || []).map(fromSupabaseRow);
-        statusHint.textContent = "Haz click o apreta en el d\u00eda que solicitar\u00e1s la sala de computaci\u00f3n.";
+        requests = (data || []).map(fromSupabaseRow).filter(item => item.space === activeRoom);
+        statusHint.textContent = `Haz click o apreta en el d\u00eda que solicitar\u00e1s la ${activeRoomLabel()}.`;
         render();
       } catch (error) {
         statusHint.textContent = "No se pudieron cargar las solicitudes.";
@@ -4202,9 +4595,25 @@
       return `${monthNames[visibleMonth - 1]} ${visibleYear}`;
     }
 
+    function activeRoomLabel() {
+      return activeRoom === "cra" ? "sala CRA" : "sala de computaci\u00f3n";
+    }
+
+    function activeRoomTitle() {
+      return activeRoom === "cra" ? "Sala CRA" : "Sala de computaci\u00f3n";
+    }
+
     function gradeFromCourse(course) {
       const match = String(course || "").match(/\d+/);
       return match ? Number(match[0]) : 0;
+    }
+
+    function normalizeCourseLabel(value) {
+      const text = normalize(value);
+      if (text.includes("pre kinder") || text.includes("prekinder")) return "Pre k\u00ednder";
+      if (text.includes("kinder")) return "K\u00ednder";
+      const grade = gradeFromCourse(value);
+      return courses.find(course => gradeFromCourse(course) === grade && grade > 0) || "";
     }
 
     function defaultCourseForTeacher(name) {
@@ -4265,7 +4674,8 @@
     }
 
     function updateSubjectOptions(value = "") {
-      const available = subjectsForTeacherCourse(teacher, courseSelect.value);
+      const available = subjectsForTeacherCourse(teacher, courseSelect.value)
+        .filter(subject => activeRoom === "computacion" || subject !== "Mantenci\u00f3n");
       fillSelect(subjectSelect, available, available.length ? "Selecciona de la lista desplegable" : "Sin asignaturas para este curso");
       subjectSelect.disabled = available.length === 0;
       if (value && available.includes(value)) subjectSelect.value = value;
@@ -4311,7 +4721,7 @@
 
     function renderCalendar() {
       const weeks = buildCalendarWeeks(visibleYear, visibleMonth);
-      calendarTitle.textContent = `Sala de computaci\u00f3n - ${visibleMonthLabel()}`;
+      calendarTitle.textContent = `${activeRoomTitle()} - ${visibleMonthLabel()}`;
       calendarBody.style.gridTemplateRows = `repeat(${weeks.length}, minmax(0, 1fr))`;
       const cells = weeks.flat().map(day => {
         const date = day.date;
@@ -5369,7 +5779,7 @@
       `).join("");
 
       return `
-        <h1>Sala de computaci&oacute;n - ${escapeHtml(visibleMonthLabel())}</h1>
+        <h1>${escapeHtml(activeRoomTitle())} - ${escapeHtml(visibleMonthLabel())}</h1>
         <p class="subtitle-export">Calendario general de solicitudes</p>
         <table class="calendar-export-table">
           <thead>
@@ -5394,7 +5804,7 @@
         toolbar.style.display = "block";
       });
       return `
-        <h1>Estad&iacute;sticas sala de computaci&oacute;n</h1>
+        <h1>Estad&iacute;sticas ${escapeHtml(activeRoomLabel())}</h1>
         <p class="subtitle-export">Panel Administraci&oacute;n - UTP | ${escapeHtml(statsScope === "all" ? "Total acumulado" : visibleMonthLabel())}</p>
         ${clone.innerHTML}
       `;
@@ -5668,9 +6078,22 @@
         setTimeout(() => openGradeImageImport(), 0);
         return;
       }
+      openGradeImportModal("Elige c\u00f3mo cargar la foto", `
+        <div class="grade-import-status">
+          Puedes tomar una foto desde el celular/tablet o subir una imagen guardada desde el equipo.
+        </div>
+        <div class="grade-import-actions" style="padding:0; margin-top:12px;">
+          <button class="primary" type="button" onclick="chooseGradeImageSource('camera')">Tomar foto</button>
+          <button type="button" onclick="chooseGradeImageSource('file')">Subir desde archivo</button>
+        </div>
+      `);
+    };
+
+    window.chooseGradeImageSource = function(source) {
       const fileInput = document.createElement("input");
       fileInput.type = "file";
       fileInput.accept = "image/*";
+      if (source === "camera") fileInput.setAttribute("capture", "environment");
       fileInput.onchange = () => {
         const file = fileInput.files && fileInput.files[0];
         if (file) importGradesFromImage(file);
@@ -6392,15 +6815,15 @@
     }
 
     window.downloadCalendarWord = function() {
-      downloadHtmlAsWord(`${exportFileBase("calendario-sala-computacion")}.doc`, `Calendario sala de computaci\u00f3n - ${visibleMonthLabel()}`, calendarExportHtml());
+      downloadHtmlAsWord(`${exportFileBase(activeRoom === "cra" ? "calendario-sala-cra" : "calendario-sala-computacion")}.doc`, `Calendario ${activeRoomLabel()} - ${visibleMonthLabel()}`, calendarExportHtml());
     };
 
     window.downloadCalendarPdf = function() {
-      printHtmlAsPdf(`Calendario sala de computaci\u00f3n - ${visibleMonthLabel()}`, calendarExportHtml());
+      printHtmlAsPdf(`Calendario ${activeRoomLabel()} - ${visibleMonthLabel()}`, calendarExportHtml());
     };
 
     window.downloadStatsPdf = function() {
-      printHtmlAsPdf("Estad\u00edsticas sala de computaci\u00f3n", statsExportHtml());
+      printHtmlAsPdf(`Estad\u00edsticas ${activeRoomLabel()}`, statsExportHtml());
     };
 
     function updateExportTools() {
@@ -6668,18 +7091,91 @@
       if (isSaved) loadSavedActivityPlans();
     }
 
-    function openActivityModule() {
+    function openActivityModule(context = "computacion") {
       if (!teacher) return;
+      activityContext = context === "cra" ? "cra" : "computacion";
       appView.classList.add("hidden");
+      moduleChooserView.classList.add("hidden");
+      randomGroupsView.classList.add("hidden");
       activityView.classList.remove("hidden");
       activityProfileName.textContent = teacher;
+      document.querySelector("#activityView .school-motto").textContent = activityContext === "cra"
+        ? "Generador de actividades para sala CRA"
+        : "Generador de actividades para sala de computaci\u00f3n";
       updateActivityCourseOptions(activityCourse.value);
       setActivityModuleView("generator");
     }
 
     function closeActivityModule() {
       activityView.classList.add("hidden");
-      appView.classList.remove("hidden");
+      openModuleChooser();
+    }
+
+    async function openRandomGroupsModule() {
+      if (!teacher) return;
+      moduleChooserView.classList.add("hidden");
+      appView.classList.add("hidden");
+      activityView.classList.add("hidden");
+      gradebookView.classList.add("hidden");
+      randomGroupsView.classList.remove("hidden");
+      groupsProfileName.textContent = teacher;
+      if (!gradebookStudents.length) await loadGradebookData();
+      const available = isAdminProfile() || isInspectorProfile()
+        ? courses.filter(course => gradeFromCourse(course) >= 1)
+        : coursesForTeacher(teacher).filter(course => gradeFromCourse(course) >= 1);
+      fillSelect(groupsCourse, available, "Selecciona curso");
+      groupsCourse.value = available[0] || "";
+      renderGroupStudentList();
+      generatedGroups.innerHTML = "";
+      groupAnimation.innerHTML = `<div class="notice" style="margin:14px;">Selecciona curso, saca ausentes y presiona comenzar.</div>`;
+    }
+
+    function renderGroupStudentList() {
+      const students = sortedStudentsForCourse(groupsCourse.value);
+      groupStudentList.innerHTML = students.length ? students.map(student => `
+        <label>
+          <input type="checkbox" data-group-student="${escapeHtml(student.id)}" checked>
+          <span>${escapeHtml(studentFullName(student))}</span>
+        </label>
+      `).join("") : `<div class="notice">No hay estudiantes activos cargados para este curso.</div>`;
+    }
+
+    function startRandomGroups() {
+      const selectedIds = [...groupStudentList.querySelectorAll("input[data-group-student]:checked")].map(input => input.dataset.groupStudent);
+      const students = selectedIds
+        .map(id => gradebookStudents.find(student => student.id === id))
+        .filter(Boolean);
+      if (students.length < 2) {
+        alert("Selecciona al menos dos estudiantes.");
+        return;
+      }
+      const size = Math.max(2, Number(groupSize.value || 2));
+      const shuffled = students
+        .map(student => ({ student, sort: Math.random() }))
+        .sort((a, b) => a.sort - b.sort)
+        .map(item => item.student);
+      animateGroupFormation(shuffled);
+      const groups = [];
+      for (let index = 0; index < shuffled.length; index += size) {
+        groups.push(shuffled.slice(index, index + size));
+      }
+      setTimeout(() => {
+        generatedGroups.innerHTML = groups.map((group, index) => `
+          <article class="group-card">
+            <h3>Grupo ${index + 1}</h3>
+            ${group.map(student => `<div>${escapeHtml(studentFullName(student))}</div>`).join("")}
+          </article>
+        `).join("");
+      }, 1500);
+    }
+
+    function animateGroupFormation(students) {
+      const preview = students.slice(0, 18);
+      groupAnimation.innerHTML = preview.map((student, index) => {
+        const left = 6 + ((index * 17) % 84);
+        const top = 14 + ((index * 23) % 64);
+        return `<div class="runner" style="left:${left}%; top:${top}%; animation-delay:${(index % 6) * 0.12}s;">${escapeHtml(studentFullName(student).charAt(0))}</div>`;
+      }).join("");
     }
 
     window.selectDate = function(date) {
@@ -6710,18 +7206,7 @@
         const sameSlot = requests.find(item => item.id !== request.id && item.date === request.date && item.time === request.time);
         if (sameSlot) throw new Error(`Ese horario ya est\u00e1 reservado por ${sameSlot.teacher}. Elige otro bloque.`);
 
-        if (request.id) {
-          await supabaseRequest(`${supabaseTable}?id=eq.${encodeURIComponent(request.id)}`, {
-            method: "PATCH",
-            body: JSON.stringify(toSupabaseRow(request)),
-          });
-        } else {
-          await supabaseRequest(supabaseTable, {
-            method: "POST",
-            headers: { Prefer: "return=minimal" },
-            body: JSON.stringify(toSupabaseRow(request)),
-          });
-        }
+        await saveRoomRequestToServer(request);
         resetForm();
         closeRequestPanel();
         await loadRequestsFromServer();
@@ -6738,7 +7223,8 @@
     document.getElementById("closePanel").addEventListener("click", closeRequestPanel);
     document.getElementById("closeDayModal").addEventListener("click", closeDayModal);
     document.getElementById("moduleBackHomeBtn").addEventListener("click", backToProfileSelector);
-    document.getElementById("openRoomModule").addEventListener("click", openRoomModule);
+    document.getElementById("openRoomModule").addEventListener("click", () => openRoomModule("computacion"));
+    document.getElementById("openCraRoomModule").addEventListener("click", () => openRoomModule("cra"));
     document.getElementById("openGradesModule").addEventListener("click", openGradesModule);
     document.getElementById("myEventsBtn").addEventListener("click", () => {
       schoolEventScope = "mine";
@@ -6746,6 +7232,18 @@
     });
     document.getElementById("allEventsBtn").addEventListener("click", () => {
       schoolEventScope = "all";
+      renderProfileCalendar();
+    });
+    document.getElementById("eventListViewBtn").addEventListener("click", () => {
+      schoolEventView = "list";
+      renderProfileCalendar();
+    });
+    document.getElementById("eventWeekViewBtn").addEventListener("click", () => {
+      schoolEventView = "week";
+      renderProfileCalendar();
+    });
+    document.getElementById("eventMonthViewBtn").addEventListener("click", () => {
+      schoolEventView = "month";
       renderProfileCalendar();
     });
     document.getElementById("colorGuideBtn").addEventListener("click", openColorGuideModal);
@@ -6768,7 +7266,18 @@
     gradeImportModal.addEventListener("click", event => {
       if (event.target === gradeImportModal) closeGradeImportModal();
     });
-    document.getElementById("openActivityModule").addEventListener("click", openActivityModule);
+    document.getElementById("openActivityModule").addEventListener("click", () => openActivityModule("computacion"));
+    document.getElementById("openActivityFromProfileBtn").addEventListener("click", () => openActivityModule("computacion"));
+    document.getElementById("openCraActivityBtn").addEventListener("click", () => openActivityModule("cra"));
+    document.getElementById("openRandomGroupsBtn").addEventListener("click", openRandomGroupsModule);
+    document.getElementById("backToModulesFromGroups").addEventListener("click", openModuleChooser);
+    document.getElementById("startGroupsBtn").addEventListener("click", startRandomGroups);
+    document.getElementById("clearGroupsBtn").addEventListener("click", () => {
+      generatedGroups.innerHTML = "";
+      renderGroupStudentList();
+      groupAnimation.innerHTML = `<div class="notice" style="margin:14px;">Selecciona curso, saca ausentes y presiona comenzar.</div>`;
+    });
+    groupsCourse.addEventListener("change", renderGroupStudentList);
     document.getElementById("backToCalendarBtn").addEventListener("click", closeActivityModule);
     document.getElementById("saveActivityBtn").addEventListener("click", saveActivityPlan);
     document.getElementById("sendActivityFeedbackBtn").addEventListener("click", sendActivityFeedback);
@@ -6869,8 +7378,8 @@
       updateExportTools();
       document.querySelectorAll(".tab").forEach(tab => tab.classList.toggle("active", tab.dataset.view === view));
       subtitle.textContent = isStats
-        ? "Estad\u00edsticas de uso de la sala de computaci\u00f3n"
-        : "Haz click o apreta en el d\u00eda que solicitar\u00e1s la sala de computaci\u00f3n";
+        ? `Estad\u00edsticas de uso de la ${activeRoomLabel()}`
+        : `Haz click o apreta en el d\u00eda que solicitar\u00e1s la ${activeRoomLabel()}`;
       if (isStats) renderStats();
     }
 
@@ -7028,6 +7537,7 @@
         course: row.curso,
         subject: row.asignatura,
         description: row.actividad,
+        space: row.espacio || "computacion",
         status: row.estado,
       };
     }
@@ -7040,8 +7550,30 @@
         curso: request.course,
         asignatura: request.subject,
         actividad: request.description,
+        espacio: activeRoom,
         estado: "activo",
       };
+    }
+
+    async function saveRoomRequestToServer(request) {
+      const row = toSupabaseRow(request);
+      const target = request.id ? `${supabaseTable}?id=eq.${encodeURIComponent(request.id)}` : supabaseTable;
+      const options = request.id
+        ? { method: "PATCH", body: JSON.stringify(row) }
+        : { method: "POST", headers: { Prefer: "return=minimal" }, body: JSON.stringify(row) };
+      try {
+        return await supabaseRequest(target, options);
+      } catch (error) {
+        const message = String(error.message || error);
+        if (activeRoom === "computacion" && message.includes("espacio")) {
+          delete row.espacio;
+          const fallbackOptions = request.id
+            ? { method: "PATCH", body: JSON.stringify(row) }
+            : { method: "POST", headers: { Prefer: "return=minimal" }, body: JSON.stringify(row) };
+          return supabaseRequest(target, fallbackOptions);
+        }
+        throw error;
+      }
     }
 
     function toIsoDate(value) {
@@ -7065,6 +7597,12 @@
         .replace(/[\u0300-\u036f]/g, "")
         .toLowerCase()
         .trim();
+    }
+
+    function toFormalTitle(value) {
+      const text = String(value || "").replace(/\s+/g, " ").trim();
+      if (!text) return "";
+      return text.charAt(0).toUpperCase() + text.slice(1);
     }
 
     function stripHtml(value) {
