@@ -471,6 +471,163 @@
       justify-self: end;
     }
 
+    .profile-calendar {
+      border: 1px solid #dce3ee;
+      border-radius: 12px;
+      background: white;
+      overflow: hidden;
+      box-shadow: 0 12px 26px rgba(31, 41, 55, 0.08);
+    }
+
+    .profile-calendar-head {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      background: #f8fafc;
+    }
+
+    .profile-calendar-head h3 {
+      margin: 0;
+      color: var(--blue);
+      font-size: 20px;
+    }
+
+    .profile-calendar-head p {
+      margin: 4px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .profile-calendar-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+
+    .profile-calendar-actions button.active {
+      background: var(--blue);
+      color: white;
+    }
+
+    .school-event-list {
+      display: grid;
+      gap: 8px;
+      padding: 12px 16px 16px;
+      max-height: 360px;
+      overflow: auto;
+    }
+
+    .school-event {
+      display: grid;
+      grid-template-columns: 88px 1fr;
+      gap: 10px;
+      border: 1px solid #dce3ee;
+      border-left: 7px solid var(--tag, var(--blue));
+      border-radius: 8px;
+      padding: 10px;
+      background: #fbfcfe;
+    }
+
+    .school-event-date {
+      font-weight: 900;
+      color: var(--blue);
+      text-align: center;
+      background: #eef5fb;
+      border-radius: 7px;
+      padding: 7px;
+      align-self: start;
+    }
+
+    .school-event-date span {
+      display: block;
+      color: var(--muted);
+      font-size: 11px;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+
+    .school-event-title {
+      font-weight: 900;
+      color: var(--ink);
+      margin-bottom: 3px;
+    }
+
+    .school-event-meta {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.35;
+    }
+
+    .tag-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 999px;
+      padding: 3px 8px;
+      background: color-mix(in srgb, var(--tag, var(--blue)) 18%, white);
+      color: #1f2937;
+      font-size: 11px;
+      font-weight: 800;
+      margin-right: 5px;
+    }
+
+    .tag-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: var(--tag, var(--blue));
+    }
+
+    .color-guide-card {
+      width: min(680px, calc(100vw - 28px));
+      border: 1px solid #d9e1ec;
+      border-radius: 12px;
+      background: white;
+      box-shadow: 0 24px 70px rgba(15, 23, 42, 0.38);
+      padding: 18px;
+    }
+
+    .color-guide-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 8px;
+      margin: 14px 0;
+    }
+
+    .color-guide-item {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      border: 1px solid #e5e7eb;
+      border-radius: 8px;
+      padding: 9px;
+      font-size: 13px;
+      background: #fbfcfe;
+    }
+
+    .event-form-card {
+      width: min(820px, calc(100vw - 28px));
+      max-height: calc(100vh - 36px);
+      overflow: auto;
+      border: 1px solid #d9e1ec;
+      border-radius: 12px;
+      background: white;
+      box-shadow: 0 24px 70px rgba(15, 23, 42, 0.38);
+      padding: 18px;
+    }
+
+    #schoolEventForm {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      padding: 0;
+      border-bottom: 0;
+    }
+
     .grade-view {
       min-height: 100vh;
       background: var(--soft);
@@ -911,6 +1068,95 @@
       border: 1px solid #dbe6f2;
       border-radius: 7px;
       background: white;
+    }
+
+    .rating-actions {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+    }
+
+    .planning-loader {
+      display: grid;
+      place-items: center;
+      gap: 12px;
+      min-height: 520px;
+      text-align: center;
+      color: #123d63;
+    }
+
+    .teacher-loader {
+      position: relative;
+      width: 170px;
+      height: 130px;
+      border-radius: 16px;
+      background: linear-gradient(180deg, #eef6ff 0%, #dbeafe 100%);
+      border: 1px solid #bfd0e2;
+      box-shadow: 0 14px 28px rgba(31, 78, 121, 0.14);
+      overflow: hidden;
+    }
+
+    .teacher-loader::before {
+      content: "";
+      position: absolute;
+      left: 58px;
+      top: 20px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: #f4d76f;
+      box-shadow: 0 54px 0 10px #1f4e79;
+    }
+
+    .paper-stack {
+      position: absolute;
+      left: 20px;
+      bottom: 18px;
+      display: grid;
+      gap: 5px;
+      animation: paperShift 1.2s ease-in-out infinite;
+    }
+
+    .paper-stack span {
+      display: block;
+      width: 48px;
+      height: 30px;
+      border-radius: 4px;
+      background: white;
+      border: 1px solid #bfd0e2;
+      box-shadow: 0 4px 8px rgba(31, 78, 121, 0.08);
+    }
+
+    .planning-pencil {
+      position: absolute;
+      right: 24px;
+      bottom: 32px;
+      width: 58px;
+      height: 8px;
+      border-radius: 999px;
+      background: #f4d76f;
+      transform: rotate(-18deg);
+      animation: pencilMove 0.9s ease-in-out infinite;
+    }
+
+    .planning-pencil::after {
+      content: "";
+      position: absolute;
+      right: -8px;
+      top: -4px;
+      border-left: 10px solid #1f2937;
+      border-top: 8px solid transparent;
+      border-bottom: 8px solid transparent;
+    }
+
+    @keyframes paperShift {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    @keyframes pencilMove {
+      0%, 100% { transform: translate(0, 0) rotate(-18deg); }
+      50% { transform: translate(-8px, 5px) rotate(-10deg); }
     }
 
     .generation-note {
@@ -1856,6 +2102,23 @@
           <span class="arrow">&rsaquo;</span>
         </button>
       </section>
+      <section class="profile-calendar" id="profileCalendarPanel">
+        <header class="profile-calendar-head">
+          <div>
+            <h3>Cronograma Escuela Unesco</h3>
+            <p id="profileCalendarSubtitle">Eventos institucionales y actividades relevantes.</p>
+          </div>
+          <div class="profile-calendar-actions">
+            <button type="button" id="myEventsBtn">Mis eventos</button>
+            <button type="button" id="allEventsBtn">Todos</button>
+            <button type="button" id="colorGuideBtn">Colores</button>
+            <button type="button" id="newSchoolEventBtn">Agregar evento UTP</button>
+          </div>
+        </header>
+        <div class="school-event-list" id="profileCalendarList">
+          <div class="notice">Cargando cronograma...</div>
+        </div>
+      </section>
     </main>
   </section>
 
@@ -1874,7 +2137,7 @@
           <div class="school-name">Escuela Unesco</div>
           <div class="school-motto">&ldquo;Educar para la Paz&rdquo;</div>
         </div>
-        <button class="module-button" type="button" id="openActivityModule">Generador de actividades</button>
+        <button class="module-button" type="button" id="openActivityModule">Generador de actividades sala de computaci&oacute;n</button>
         <div class="profile-name">
           <div id="profileName">Perfil docente</div>
           <button class="back" type="button" id="backBtn">Cambiar perfil</button>
@@ -2072,6 +2335,9 @@
             <label>Valoraci&oacute;n de la planificaci&oacute;n</label>
             <div class="stars" id="activityStars"></div>
             <textarea id="activityRatingComment" placeholder="Comentario opcional de mejora"></textarea>
+            <div class="rating-actions">
+              <button type="button" id="sendActivityFeedbackBtn">Enviar valoraci&oacute;n</button>
+            </div>
           </div>
           <article class="plan-document" id="activityPreview">
             <p>La planificaci&oacute;n aparecer&aacute; aqu&iacute;.</p>
@@ -2131,6 +2397,80 @@
     </section>
   </div>
 
+  <div class="modal-overlay" id="colorGuideModal" aria-hidden="true">
+    <section class="color-guide-card" role="dialog" aria-modal="true" aria-labelledby="colorGuideTitle">
+      <header class="profile-calendar-head" style="padding:0 0 10px; border-bottom:0;">
+        <div>
+          <h3 id="colorGuideTitle">Gu&iacute;a de colores del cronograma</h3>
+          <p>Estos colores permiten reconocer r&aacute;pido el tipo de actividad.</p>
+        </div>
+        <button class="modal-close" type="button" id="closeColorGuideModal" aria-label="Cerrar">&times;</button>
+      </header>
+      <div class="color-guide-grid" id="colorGuideGrid"></div>
+      <div class="actions">
+        <button class="primary" type="button" id="dismissColorGuideBtn">Entendido</button>
+      </div>
+    </section>
+  </div>
+
+  <div class="modal-overlay" id="schoolEventModal" aria-hidden="true">
+    <section class="event-form-card" role="dialog" aria-modal="true" aria-labelledby="schoolEventTitle">
+      <header class="profile-calendar-head" style="padding:0 0 12px; border-bottom:0;">
+        <div>
+          <h3 id="schoolEventTitle">Agregar evento al cronograma</h3>
+          <p>Completa los datos para que el evento aparezca filtrado por perfil, curso y categor&iacute;a.</p>
+        </div>
+        <button class="modal-close" type="button" id="closeSchoolEventModal" aria-label="Cerrar">&times;</button>
+      </header>
+      <form id="schoolEventForm">
+        <div>
+          <label for="schoolEventDate">Fecha</label>
+          <input id="schoolEventDate" type="date" required>
+        </div>
+        <div>
+          <label for="schoolEventCategory">Categor&iacute;a</label>
+          <select id="schoolEventCategory" required></select>
+        </div>
+        <div>
+          <label for="schoolEventStart">Hora inicio</label>
+          <input id="schoolEventStart" type="time">
+        </div>
+        <div>
+          <label for="schoolEventEnd">Hora t&eacute;rmino</label>
+          <input id="schoolEventEnd" type="time">
+        </div>
+        <div class="wide">
+          <label for="schoolEventTitleInput">T&iacute;tulo</label>
+          <input id="schoolEventTitleInput" required placeholder="Ej: Consejo de profesores">
+        </div>
+        <div>
+          <label for="schoolEventPlace">Lugar</label>
+          <input id="schoolEventPlace" placeholder="Ej: Sala de profesores">
+        </div>
+        <div>
+          <label for="schoolEventPriority">Prioridad</label>
+          <select id="schoolEventPriority">
+            <option value="normal">Normal</option>
+            <option value="importante">Importante</option>
+            <option value="urgente">Urgente</option>
+          </select>
+        </div>
+        <div class="wide">
+          <label for="schoolEventParticipants">Participantes</label>
+          <input id="schoolEventParticipants" placeholder="Ej: Todos, Paulo Montoya, Equipo PIE, 5° Básico">
+        </div>
+        <div class="wide">
+          <label for="schoolEventDescription">Descripci&oacute;n breve</label>
+          <textarea id="schoolEventDescription" placeholder="Detalle breve del evento"></textarea>
+        </div>
+        <div class="actions">
+          <button class="primary" type="submit" id="saveSchoolEventBtn">Guardar evento</button>
+          <button type="button" id="clearSchoolEventBtn">Limpiar</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
   <script>
     const teachers = [
       "Betsy Vega",
@@ -2150,8 +2490,10 @@
       "Sol Quintana",
     ];
     const adminProfile = "Administraci\u00f3n - UTP";
+    const inspectorProfile = "Inspector\u00eda";
     const adminPassword = "unesco";
     const gradebookPassword = "violetit4";
+    const qrAccessPassword = "eunesco";
     const pieColors = ["#1f4e79", "#5b9bd5", "#70ad47", "#f4d76f", "#ed7d31", "#a5a5a5", "#8064a2", "#c0504d"];
     const monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     const monthOptions = monthNames.map((name, index) => ({ label: `${name} 2026`, month: index + 1, year: 2026 }));
@@ -2167,6 +2509,7 @@
     const supabaseTable = "solicitudes_sala";
     const activityPlansTable = "activity_plans";
     const activityFeedbackTable = "activity_plan_feedback";
+    const schoolEventsTable = "school_events";
     const gradebookStudentsTable = "gradebook_students";
     const gradebookEntriesTable = "gradebook_entries";
     const gradebookAttendanceTable = "gradebook_attendance";
@@ -2176,6 +2519,20 @@
     const productionAppUrl = "https://sala-computacion-unesco.vercel.app";
     const gradeImageImportEndpoint = "/api/importar-notas-imagen";
     const geminiGenerationEnabled = true;
+    const schoolEventCategories = [
+      { name: "Sala de computaci\u00f3n", color: "#2e7d32" },
+      { name: "CRA / Biblioteca", color: "#38bdf8" },
+      { name: "Equipo PIE", color: "#8b5cf6" },
+      { name: "Consejo de profesores", color: "#1f4e79" },
+      { name: "Reuni\u00f3n integral", color: "#f4d76f" },
+      { name: "Equipo de gesti\u00f3n", color: "#64748b" },
+      { name: "Formaci\u00f3n / acto", color: "#ef7777" },
+      { name: "Apoderados", color: "#f59e0b" },
+      { name: "Capacitaci\u00f3n", color: "#0ea5e9" },
+      { name: "Salida pedag\u00f3gica / visita", color: "#14b8a6" },
+      { name: "Feriado / celebraci\u00f3n", color: "#94a3b8" },
+      { name: "General", color: "#6b7280" },
+    ];
     const mathOAsByCourse = {
       "1\u00b0 B\u00e1sico": [
         "OA 1: N\u00fameros hasta 20",
@@ -3312,6 +3669,8 @@
 
     let teacher = "";
     let requests = [];
+    let schoolEvents = [];
+    let schoolEventScope = "mine";
     let savedActivityPlans = [];
     let currentActivityPlan = null;
     let currentActivityRating = 0;
@@ -3387,20 +3746,28 @@
     const gradeImportModal = document.getElementById("gradeImportModal");
     const gradeImportSubtitle = document.getElementById("gradeImportSubtitle");
     const gradeImportPreview = document.getElementById("gradeImportPreview");
+    const profileCalendarList = document.getElementById("profileCalendarList");
+    const profileCalendarSubtitle = document.getElementById("profileCalendarSubtitle");
+    const colorGuideModal = document.getElementById("colorGuideModal");
+    const colorGuideGrid = document.getElementById("colorGuideGrid");
+    const schoolEventModal = document.getElementById("schoolEventModal");
+    const schoolEventForm = document.getElementById("schoolEventForm");
+    const schoolEventCategory = document.getElementById("schoolEventCategory");
 
     function renderProfiles(filter = "") {
       const term = normalize(filter);
-      const profiles = [adminProfile, ...teachers];
+      const profiles = [adminProfile, inspectorProfile, ...teachers];
       const visibleTeachers = profiles.filter(name => normalize(name).includes(term));
       grid.innerHTML = visibleTeachers.map(name => {
         const isAdmin = name === adminProfile;
+        const isInspector = name === inspectorProfile;
         const initials = name.split(" ").map(part => part[0]).join("").slice(0, 2).toUpperCase();
         return `
-          <button class="card ${isAdmin ? "admin" : ""}" type="button" onclick="openProfile('${escapeJs(name)}')">
+          <button class="card ${isAdmin || isInspector ? "admin" : ""}" type="button" onclick="openProfile('${escapeJs(name)}')">
             <span class="avatar">${escapeHtml(initials)}</span>
             <span>
               <span class="name">${escapeHtml(name)}</span>
-              <span class="role">${isAdmin ? "Panel institucional" : "Perfil docente"}</span>
+              <span class="role">${isAdmin ? "Panel institucional" : (isInspector ? "Asistencia por curso" : "Perfil docente")}</span>
             </span>
             <span class="arrow">&rsaquo;</span>
           </button>
@@ -3426,10 +3793,19 @@
       profileName.textContent = teacher;
       activityProfileName.textContent = teacher;
       gradebookProfileName.textContent = teacher;
-      moduleChooserTitle.textContent = isAdminProfile() ? "Panel Administraci\u00f3n - UTP" : teacher;
-      moduleChooserSubtitle.textContent = isAdminProfile()
+      moduleChooserTitle.textContent = isAdminProfile() ? "Panel Administraci\u00f3n - UTP" : (isInspectorProfile() ? "Panel Inspector\u00eda" : teacher);
+      moduleChooserSubtitle.textContent = isAdminProfile() || isInspectorProfile()
         ? "Selecciona el m\u00f3dulo institucional que deseas revisar."
         : "Selecciona el m\u00f3dulo que usar\u00e1s.";
+      document.getElementById("openRoomModule").classList.toggle("hidden", isInspectorProfile());
+      document.getElementById("openActivityModule").classList.toggle("hidden", isInspectorProfile());
+      document.getElementById("newSchoolEventBtn").classList.toggle("hidden", !isAdminProfile());
+      schoolEventScope = "mine";
+      fillSchoolEventCategoryOptions();
+      renderColorGuide();
+      renderProfileCalendar();
+      loadSchoolEventsFromServer();
+      showColorGuideOnProfileEntry();
       resetForm();
       appView.classList.toggle("admin-mode", isAdminProfile());
     };
@@ -3482,6 +3858,217 @@
       gradeEditMode = false;
       renderGradebook();
       loadGradebookBaseData();
+    }
+
+    async function loadSchoolEventsFromServer() {
+      if (!profileCalendarList) return;
+      profileCalendarList.innerHTML = `<div class="notice">Cargando cronograma institucional...</div>`;
+      try {
+        const data = await supabaseRequest(`${schoolEventsTable}?select=*&estado=eq.activo&order=fecha.asc,hora_inicio.asc`);
+        schoolEvents = (data || []).map(fromSchoolEventRow);
+        renderProfileCalendar();
+      } catch (error) {
+        profileCalendarList.innerHTML = `
+          <div class="grade-alert">
+            No se pudo cargar el cronograma. Revisa si ya ejecutaste <strong>supabase_school_events.sql</strong> en Supabase.<br>
+            <strong>Detalle:</strong> ${escapeHtml(error.message || error)}
+          </div>
+        `;
+      }
+    }
+
+    function fromSchoolEventRow(row) {
+      return {
+        id: row.id,
+        sourceKey: row.source_key || "",
+        date: row.fecha,
+        start: row.hora_inicio || "",
+        end: row.hora_termino || "",
+        title: row.titulo || "",
+        category: row.categoria || "General",
+        place: row.lugar || "",
+        responsible: row.responsable || "",
+        participants: Array.isArray(row.participantes) ? row.participantes : [],
+        courses: Array.isArray(row.cursos) ? row.cursos : [],
+        teachers: Array.isArray(row.docentes) ? row.docentes : [],
+        description: row.descripcion || "",
+        visibility: row.visibilidad || "todos",
+        priority: row.prioridad || "normal",
+      };
+    }
+
+    function renderProfileCalendar() {
+      if (!profileCalendarList) return;
+      document.getElementById("myEventsBtn").classList.toggle("active", schoolEventScope === "mine");
+      document.getElementById("allEventsBtn").classList.toggle("active", schoolEventScope === "all");
+      const items = schoolEvents
+        .filter(event => schoolEventScope === "all" || eventBelongsToProfile(event, teacher))
+        .filter(event => new Date(`${event.date}T00:00:00`) >= startOfToday())
+        .slice(0, 24);
+      profileCalendarSubtitle.textContent = schoolEventScope === "all"
+        ? "Vista con todos los eventos institucionales pr\u00f3ximos."
+        : "Vista personal: eventos donde participa tu perfil, tu curso o todos los docentes.";
+      profileCalendarList.innerHTML = items.length ? items.map(schoolEventHtml).join("") : `
+        <div class="notice">
+          ${schoolEventScope === "all" ? "No hay eventos cargados." : "No hay eventos personales pr\u00f3ximos. Puedes cambiar a la vista Todos."}
+        </div>
+      `;
+    }
+
+    function startOfToday() {
+      const now = new Date();
+      return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+    }
+
+    function eventBelongsToProfile(event, name) {
+      if (!name) return false;
+      if (isAdminProfile() || isInspectorProfile()) return true;
+      const terms = [
+        ...event.participants,
+        ...event.teachers,
+        ...event.courses,
+        event.responsible,
+        event.description,
+        event.title,
+      ].map(normalize);
+      const profile = normalize(name);
+      if (terms.some(term => term === "todos" || term.includes("todos los docentes") || term.includes(profile))) return true;
+      return coursesForTeacher(name).some(course => terms.some(term => term.includes(normalize(course))));
+    }
+
+    function schoolEventHtml(event) {
+      const color = colorForSchoolEvent(event.category);
+      const time = [event.start, event.end].filter(Boolean).join(" - ");
+      const people = [...new Set([...(event.participants || []), ...(event.courses || []), ...(event.teachers || [])])].filter(Boolean).join(", ");
+      return `
+        <article class="school-event" style="--tag:${color}">
+          <div class="school-event-date">
+            ${formatSchoolEventDay(event.date)}
+            <span>${escapeHtml(formatSchoolEventMonth(event.date))}</span>
+          </div>
+          <div>
+            <div>
+              <span class="tag-pill" style="--tag:${color}"><span class="tag-dot"></span>${escapeHtml(event.category)}</span>
+              ${event.priority !== "normal" ? `<span class="tag-pill" style="--tag:#ef4444"><span class="tag-dot"></span>${escapeHtml(event.priority)}</span>` : ""}
+            </div>
+            <div class="school-event-title">${escapeHtml(event.title)}</div>
+            <div class="school-event-meta">
+              ${time ? `<strong>${escapeHtml(time)}</strong> | ` : ""}${escapeHtml(event.place || "Escuela")}<br>
+              ${people ? `Participan: ${escapeHtml(people)}<br>` : ""}
+              ${event.description ? escapeHtml(event.description) : ""}
+            </div>
+          </div>
+        </article>
+      `;
+    }
+
+    function colorForSchoolEvent(category) {
+      return (schoolEventCategories.find(item => item.name === category) || schoolEventCategories[schoolEventCategories.length - 1]).color;
+    }
+
+    function formatSchoolEventDay(value) {
+      const date = new Date(`${value}T00:00:00`);
+      return Number.isNaN(date.getTime()) ? "--" : String(date.getDate()).padStart(2, "0");
+    }
+
+    function formatSchoolEventMonth(value) {
+      const date = new Date(`${value}T00:00:00`);
+      return Number.isNaN(date.getTime()) ? "" : monthNames[date.getMonth()].slice(0, 3);
+    }
+
+    function renderColorGuide() {
+      colorGuideGrid.innerHTML = schoolEventCategories.map(item => `
+        <div class="color-guide-item" style="--tag:${item.color}">
+          <span class="tag-dot"></span>
+          <strong>${escapeHtml(item.name)}</strong>
+        </div>
+      `).join("");
+    }
+
+    function showColorGuideOnProfileEntry() {
+      if (!teacher) return;
+      const key = `colorGuideSeen:${teacher}`;
+      try {
+        if (sessionStorage.getItem(key) === "1") return;
+        sessionStorage.setItem(key, "1");
+      } catch {}
+      openColorGuideModal();
+    }
+
+    function openColorGuideModal() {
+      colorGuideModal.classList.add("active");
+      colorGuideModal.setAttribute("aria-hidden", "false");
+    }
+
+    function closeColorGuideModal() {
+      colorGuideModal.classList.remove("active");
+      colorGuideModal.setAttribute("aria-hidden", "true");
+    }
+
+    function openSchoolEventModal() {
+      if (!isAdminProfile()) return;
+      schoolEventModal.classList.add("active");
+      schoolEventModal.setAttribute("aria-hidden", "false");
+      document.getElementById("schoolEventDate").value = new Date().toISOString().slice(0, 10);
+    }
+
+    function closeSchoolEventModal() {
+      schoolEventModal.classList.remove("active");
+      schoolEventModal.setAttribute("aria-hidden", "true");
+    }
+
+    function fillSchoolEventCategoryOptions() {
+      schoolEventCategory.innerHTML = schoolEventCategories
+        .map(item => `<option value="${escapeHtml(item.name)}">${escapeHtml(item.name)}</option>`)
+        .join("");
+    }
+
+    function splitEventList(value) {
+      return String(value || "")
+        .split(",")
+        .map(item => item.trim())
+        .filter(Boolean);
+    }
+
+    async function saveSchoolEvent(event) {
+      event.preventDefault();
+      if (!isAdminProfile()) return;
+      const participants = splitEventList(document.getElementById("schoolEventParticipants").value);
+      const body = {
+        fecha: document.getElementById("schoolEventDate").value,
+        hora_inicio: document.getElementById("schoolEventStart").value || null,
+        hora_termino: document.getElementById("schoolEventEnd").value || null,
+        titulo: document.getElementById("schoolEventTitleInput").value.trim(),
+        categoria: schoolEventCategory.value,
+        lugar: document.getElementById("schoolEventPlace").value.trim() || "Escuela",
+        responsable: "U.T.P",
+        participantes: participants.length ? participants : ["Todos"],
+        cursos: participants.filter(item => gradeFromCourse(item) >= 1),
+        docentes: participants.filter(item => teachers.includes(item)),
+        descripcion: document.getElementById("schoolEventDescription").value.trim(),
+        visibilidad: "todos",
+        prioridad: document.getElementById("schoolEventPriority").value,
+        estado: "activo",
+      };
+      if (!body.fecha || !body.titulo || !body.categoria) {
+        alert("Fecha, t\u00edtulo y categor\u00eda son obligatorios.");
+        return;
+      }
+      try {
+        document.getElementById("saveSchoolEventBtn").disabled = true;
+        await supabaseRequest(schoolEventsTable, {
+          method: "POST",
+          headers: { Prefer: "return=minimal" },
+          body: JSON.stringify(body),
+        });
+        closeSchoolEventModal();
+        schoolEventForm.reset();
+        await loadSchoolEventsFromServer();
+      } catch (error) {
+        alert(error.message || error);
+      } finally {
+        document.getElementById("saveSchoolEventBtn").disabled = false;
+      }
     }
 
     async function loadRequestsFromServer() {
@@ -3631,6 +4218,7 @@
     }
 
     function coursesForTeacher(name) {
+      if (name === inspectorProfile) return [];
       if (noCalendarTeachers.includes(name)) return [];
       if (name === "Maria Eugenia Carvajal") return ["Pre k\u00ednder"];
       if (name === "Loreto Pav\u00e9z") return ["K\u00ednder"];
@@ -3650,6 +4238,7 @@
 
     function subjectsForTeacherCourse(name, course) {
       const grade = gradeFromCourse(course);
+      if (name === inspectorProfile) return [];
       if (noCalendarTeachers.includes(name)) return [];
       if (name === "Maria Eugenia Carvajal") return course === "Pre k\u00ednder" ? withOrientation(name, ["Educaci\u00f3n Parvularia"]) : [];
       if (name === "Loreto Pav\u00e9z") return course === "K\u00ednder" ? withOrientation(name, ["Educaci\u00f3n Parvularia"]) : [];
@@ -4647,6 +5236,21 @@
       activityMessage.textContent = `${generationSourceLabel(plan)}. Puedes editar los recuadros antes de guardar o descargar.`;
     }
 
+    function showActivityGenerationLoading() {
+      activityPreview.innerHTML = `
+        <div class="planning-loader" role="status" aria-live="polite">
+          <div class="teacher-loader" aria-hidden="true">
+            <div class="paper-stack"><span></span><span></span><span></span></div>
+            <div class="planning-pencil"></div>
+          </div>
+          <div>
+            <strong>Generando planificaci&oacute;n...</strong><br>
+            <span class="saved-meta">La app est&aacute; revisando el OA, el curso y buenas actividades previas.</span>
+          </div>
+        </div>
+      `;
+    }
+
     window.setActivityDocumentView = function(view) {
       currentActivityDocumentView = view;
       activityPreview.querySelectorAll("[data-activity-doc-tab]").forEach(button => {
@@ -4797,11 +5401,14 @@
     }
 
     function gradebookCoursesForTeacher(name) {
-      if (isAdminProfile()) return courses.filter(course => gradeFromCourse(course) >= 1);
+      if (isAdminProfile() || isInspectorProfile()) return courses.filter(course => gradeFromCourse(course) >= 1);
+      if (name === "Paulo Montoya" || name === "Jos\u00e9 \u00c1lvarez") return coursesForTeacher(name).filter(course => gradeFromCourse(course) >= 5);
       return coursesForTeacher(name).filter(course => gradeFromCourse(course) >= 1);
     }
 
     function gradebookSubjectsForTeacherCourse(name, course) {
+      if (name === "Paulo Montoya" && gradeFromCourse(course) < 5) return [];
+      if (name === "Jos\u00e9 \u00c1lvarez" && gradeFromCourse(course) < 5) return [];
       return subjectsForTeacherCourse(name, course)
         .filter(subject => !["Mantenci\u00f3n", "Educaci\u00f3n Parvularia"].includes(subject));
     }
@@ -4832,6 +5439,11 @@
     }
 
     function renderGradebook(view = "") {
+      if (isInspectorProfile()) {
+        renderGradebookTabs("attendance");
+        renderGradebookStudentReports();
+        return;
+      }
       if (isAdminProfile()) {
         renderGradebookTabs(view || "utp");
         if ((view || "utp") === "students") renderGradebookStudentReports();
@@ -4845,6 +5457,12 @@
     }
 
     function renderGradebookTabs(active = "courses") {
+      if (isInspectorProfile()) {
+        gradebookTabs.innerHTML = `
+          <button class="grade-tab active" type="button" onclick="renderGradebook('attendance')">Asistencia por curso</button>
+        `;
+        return;
+      }
       if (isAdminProfile()) {
         gradebookTabs.innerHTML = `
           <button class="grade-tab ${active === "utp" ? "active" : ""}" type="button" onclick="renderGradebook('utp')">Resumen UTP</button>
@@ -4942,8 +5560,24 @@
       );
     }
 
+    function isConceptSubject(subject = gradebookSelectedSubject) {
+      return normalize(subject).includes("orientacion");
+    }
+
+    function conceptValues() {
+      return ["MB", "B", "S", "I"];
+    }
+
+    function conceptSummary(values) {
+      const valid = (values || []).map(value => String(value || "").toUpperCase()).filter(value => conceptValues().includes(value));
+      if (!valid.length) return "-";
+      const score = { MB: 4, B: 3, S: 2, I: 1 };
+      return valid.slice().sort((a, b) => score[b] - score[a])[0];
+    }
+
     function renderTeacherGradebookTable() {
       renderGradebookTabs("table");
+      const conceptMode = isConceptSubject();
       const students = sortedStudentsForCourse(gradebookSelectedCourse);
       const rows = students.map((student, index) => {
         const entry = entryForStudent(student.id);
@@ -4956,9 +5590,9 @@
               <div class="saved-meta">${escapeHtml(student.run || "")}</div>
             </td>
             ${Array.from({ length: gradeSlots }, (_, gradeIndex) => `
-              <td><input class="grade-input" data-row-index="${index}" data-grade-index="${gradeIndex}" inputmode="numeric" maxlength="2" value="${escapeHtml(grades[gradeIndex] || "")}" ${gradeEditMode ? "" : "disabled"} onkeydown="handleGradeInputKeydown(event)" oninput="validateGradeInput(this)" onblur="updateRowAverage(this.closest('tr'))"></td>
+              <td><input class="grade-input" data-row-index="${index}" data-grade-index="${gradeIndex}" inputmode="${conceptMode ? "text" : "numeric"}" maxlength="2" value="${escapeHtml(grades[gradeIndex] || "")}" ${gradeEditMode ? "" : "disabled"} onkeydown="handleGradeInputKeydown(event)" oninput="validateGradeInput(this)" onblur="finalizeGradeInput(this); updateRowAverage(this.closest('tr'))"></td>
             `).join("")}
-            <td class="average-cell">${formatAverage(calculateAverage(grades))}</td>
+            <td class="average-cell">${conceptMode ? conceptSummary(grades) : formatAverage(calculateAverage(grades))}</td>
           </tr>
         `;
       }).join("");
@@ -4967,12 +5601,12 @@
         <section class="grade-toolbar">
           <div>
             <strong>${escapeHtml(gradebookSelectedCourse)} | ${escapeHtml(gradebookSelectedSubject)}</strong><br>
-            <span class="saved-meta">Profesor/a: ${escapeHtml(teacher)}. Las notas deben ser n&uacute;meros enteros entre 10 y 70.</span>
+            <span class="saved-meta">Profesor/a: ${escapeHtml(teacher)}. ${conceptMode ? "En Orientaci&oacute;n usa conceptos: MB, B, S o I." : "Las notas deben ser n&uacute;meros enteros entre 10 y 70."}</span>
           </div>
           <div class="grade-actions">
             <button type="button" onclick="selectGradebookCourse('${escapeJs(gradebookSelectedCourse)}')">Volver a asignaturas</button>
             <button type="button" onclick="toggleGradeEditMode()" class="${gradeEditMode ? "" : "primary"}">${gradeEditMode ? "Bloquear edici&oacute;n" : "Ingresar notas"}</button>
-            <button type="button" onclick="openGradeImageImport()">Subir foto del libro</button>
+            ${conceptMode ? "" : `<button type="button" onclick="openGradeImageImport()">Subir foto del libro</button>`}
             <button type="button" onclick="saveGradebookEntries()" class="primary">Guardar planilla</button>
           </div>
         </section>
@@ -4983,8 +5617,8 @@
                 <tr>
                   <th>N&deg;</th>
                   <th>Estudiante</th>
-                  ${Array.from({ length: gradeSlots }, (_, i) => `<th>Nota ${i + 1}</th>`).join("")}
-                  <th>Promedio</th>
+                  ${Array.from({ length: gradeSlots }, (_, i) => `<th>${conceptMode ? "Concepto" : "Nota"} ${i + 1}</th>`).join("")}
+                  <th>${conceptMode ? "Concepto final" : "Promedio"}</th>
                 </tr>
               </thead>
               <tbody id="gradebookRows">${rows}</tbody>
@@ -5230,6 +5864,15 @@
 
     window.validateGradeInput = function(input) {
       const original = input.value;
+      if (isConceptSubject()) {
+        input.value = original.toUpperCase().replace(/[^MBSI]/g, "").slice(0, 2);
+        if (input.value.length === 2 && input.value !== "MB") {
+          alert("En Orientaci\u00f3n solo puedes ingresar MB, B, S o I.");
+          input.value = "";
+        }
+        updateRowAverage(input.closest("tr"));
+        return;
+      }
       if (/[.,]/.test(original)) {
         alert("Las notas no pueden llevar decimales. Ingresa un n\u00famero entero entre 10 y 70.");
         input.value = original.replace(/[.,].*$/, "");
@@ -5247,18 +5890,30 @@
       updateRowAverage(input.closest("tr"));
     };
 
+    window.finalizeGradeInput = function(input) {
+      if (!isConceptSubject()) return;
+      const value = input.value.trim().toUpperCase();
+      if (value && !conceptValues().includes(value)) {
+        alert("En Orientaci\u00f3n solo puedes ingresar MB, B, S o I.");
+        input.value = "";
+      } else {
+        input.value = value;
+      }
+    };
+
     window.updateRowAverage = function(row) {
       if (!row) return;
       const grades = readGradesFromRow(row);
       const cell = row.querySelector(".average-cell");
-      if (cell) cell.textContent = formatAverage(calculateAverage(grades));
+      if (cell) cell.textContent = isConceptSubject() ? conceptSummary(grades) : formatAverage(calculateAverage(grades));
     };
 
     function readGradesFromRow(row) {
-      return [...row.querySelectorAll(".grade-input")]
+      const values = [...row.querySelectorAll(".grade-input")]
         .map(input => input.value.trim())
-        .filter(Boolean)
-        .map(Number);
+        .filter(Boolean);
+      if (isConceptSubject()) return values.map(value => value.toUpperCase());
+      return values.map(Number);
     }
 
     function calculateAverage(grades) {
@@ -5274,19 +5929,28 @@
     async function saveGradebookEntries() {
       const rows = [...gradebookContent.querySelectorAll("tbody tr[data-student-id]")];
       if (!rows.length) return;
-      const invalid = rows.some(row => readGradesFromRow(row).some(value => !Number.isInteger(value) || value < 10 || value > 70));
+      const conceptMode = isConceptSubject();
+      const invalid = rows.some(row => readGradesFromRow(row).some(value => conceptMode
+        ? !conceptValues().includes(String(value).toUpperCase())
+        : (!Number.isInteger(value) || value < 10 || value > 70)
+      ));
       if (invalid) {
-        alert("Hay notas fuera de rango. Revisa que todas sean enteros entre 10 y 70.");
+        alert(conceptMode
+          ? "Hay conceptos no v\u00e1lidos. En Orientaci\u00f3n solo usa MB, B, S o I."
+          : "Hay notas fuera de rango. Revisa que todas sean enteros entre 10 y 70.");
         return;
       }
 
       const payloads = rows.map(row => {
         const studentId = row.dataset.studentId;
-        const grades = [...row.querySelectorAll(".grade-input")].map(input => input.value.trim()).map(value => value ? Number(value) : null);
+        const grades = [...row.querySelectorAll(".grade-input")].map(input => input.value.trim()).map(value => {
+          if (!value) return null;
+          return conceptMode ? value.toUpperCase() : Number(value);
+        });
         return {
           studentId,
           grades,
-          average: calculateAverage(grades),
+          average: conceptMode ? null : calculateAverage(grades),
           existing: entryForStudent(studentId),
         };
       });
@@ -5447,8 +6111,9 @@
         .filter(entry => entry.studentId === student.id && entry.course === student.course)
         .sort((a, b) => a.subject.localeCompare(b.subject, "es"))
         .map(entry => {
-          const studentAverage = entry.average || calculateAverage(entry.grades);
-          const courseAverage = courseSubjectAverage(entry.course, entry.subject);
+          const conceptMode = isConceptSubject(entry.subject);
+          const studentAverage = conceptMode ? conceptSummary(entry.grades) : (entry.average || calculateAverage(entry.grades));
+          const courseAverage = conceptMode ? courseSubjectConcept(entry.course, entry.subject) : courseSubjectAverage(entry.course, entry.subject);
           return `
             <tr>
               <td>${escapeHtml(entry.subject)}</td>
@@ -5474,7 +6139,7 @@
             <div><strong>Fecha:</strong> ${new Date().toLocaleDateString("es-CL")}</div>
           </div>
           <div class="report-legend">
-            <strong>Simbolog&iacute;a:</strong> PC = Promedio del curso en la asignatura | PA = Promedio del alumno/a en la asignatura.
+            <strong>Simbolog&iacute;a:</strong> PC = Promedio del curso en la asignatura | PA = Promedio del alumno/a en la asignatura. En Orientaci&oacute;n, PC y PA muestran concepto.
           </div>
           <table class="plan-table">
             <thead>
@@ -5503,6 +6168,15 @@
         .map(Number);
       if (!values.length) return null;
       return Math.round(values.reduce((sum, value) => sum + value, 0) / values.length);
+    }
+
+    function courseSubjectConcept(course, subject) {
+      const concepts = gradebookEntries
+        .filter(entry => entry.course === course && entry.subject === subject)
+        .flatMap(entry => entry.grades || [])
+        .map(value => String(value || "").toUpperCase())
+        .filter(value => conceptValues().includes(value));
+      return conceptSummary(concepts);
     }
 
     function attendanceForStudent(studentId, course) {
@@ -5810,7 +6484,6 @@
         }
         if (!saved || !saved.id) throw new Error("No se recibi\u00f3 confirmaci\u00f3n de guardado.");
         currentActivityPlan = { ...plan, id: saved.id };
-        if (currentActivityRating > 0) await saveActivityFeedback(saved.id);
         activityMessage.textContent = "Actividad guardada correctamente.";
         await loadSavedActivityPlans();
       } catch (error) {
@@ -5830,6 +6503,47 @@
           comentario: activityRatingComment.value.trim(),
         }),
       });
+    }
+
+    async function sendActivityFeedback() {
+      const plan = collectEditedActivityPlan();
+      if (!plan) {
+        alert("Primero genera una planificaci\u00f3n.");
+        return;
+      }
+      if (!currentActivityRating) {
+        alert("Selecciona una valoraci\u00f3n de 1 a 5 estrellas antes de enviar.");
+        return;
+      }
+      activityMessage.textContent = "Enviando valoraci\u00f3n para mejorar las pr\u00f3ximas planificaciones...";
+      try {
+        let planId = plan.id;
+        const row = toActivityPlanRow(plan);
+        if (planId) {
+          await supabaseRequest(`${activityPlansTable}?id=eq.${encodeURIComponent(planId)}`, {
+            method: "PATCH",
+            headers: { Prefer: "return=minimal" },
+            body: JSON.stringify(row),
+          });
+        } else {
+          const saved = await supabaseRequest(activityPlansTable, {
+            method: "POST",
+            headers: { Prefer: "return=representation" },
+            body: JSON.stringify(row),
+          });
+          planId = saved && saved[0] ? saved[0].id : "";
+          if (!planId) throw new Error("No se pudo guardar la actividad antes de enviar la valoraci\u00f3n.");
+          currentActivityPlan = { ...plan, id: planId };
+        }
+        await saveActivityFeedback(planId);
+        activityMessage.textContent = currentActivityRating >= 4
+          ? "Valoraci\u00f3n enviada. Esta actividad queda disponible como ejemplo de alta calidad para las pr\u00f3ximas plantillas."
+          : "Valoraci\u00f3n enviada. La app usar\u00e1 este comentario para ajustar las pr\u00f3ximas propuestas.";
+        await loadSavedActivityPlans();
+      } catch (error) {
+        activityMessage.textContent = "No se pudo enviar la valoraci\u00f3n.";
+        alert(error.message || error);
+      }
     }
 
     async function loadSavedActivityPlans() {
@@ -6026,6 +6740,27 @@
     document.getElementById("moduleBackHomeBtn").addEventListener("click", backToProfileSelector);
     document.getElementById("openRoomModule").addEventListener("click", openRoomModule);
     document.getElementById("openGradesModule").addEventListener("click", openGradesModule);
+    document.getElementById("myEventsBtn").addEventListener("click", () => {
+      schoolEventScope = "mine";
+      renderProfileCalendar();
+    });
+    document.getElementById("allEventsBtn").addEventListener("click", () => {
+      schoolEventScope = "all";
+      renderProfileCalendar();
+    });
+    document.getElementById("colorGuideBtn").addEventListener("click", openColorGuideModal);
+    document.getElementById("newSchoolEventBtn").addEventListener("click", openSchoolEventModal);
+    document.getElementById("closeColorGuideModal").addEventListener("click", closeColorGuideModal);
+    document.getElementById("dismissColorGuideBtn").addEventListener("click", closeColorGuideModal);
+    colorGuideModal.addEventListener("click", event => {
+      if (event.target === colorGuideModal) closeColorGuideModal();
+    });
+    document.getElementById("closeSchoolEventModal").addEventListener("click", closeSchoolEventModal);
+    document.getElementById("clearSchoolEventBtn").addEventListener("click", () => schoolEventForm.reset());
+    schoolEventForm.addEventListener("submit", saveSchoolEvent);
+    schoolEventModal.addEventListener("click", event => {
+      if (event.target === schoolEventModal) closeSchoolEventModal();
+    });
     document.getElementById("backToModulesFromGrades").addEventListener("click", openModuleChooser);
     document.getElementById("closeGradeImportModal").addEventListener("click", closeGradeImportModal);
     document.getElementById("cancelGradeImportBtn").addEventListener("click", closeGradeImportModal);
@@ -6036,6 +6771,7 @@
     document.getElementById("openActivityModule").addEventListener("click", openActivityModule);
     document.getElementById("backToCalendarBtn").addEventListener("click", closeActivityModule);
     document.getElementById("saveActivityBtn").addEventListener("click", saveActivityPlan);
+    document.getElementById("sendActivityFeedbackBtn").addEventListener("click", sendActivityFeedback);
     document.getElementById("downloadActivityWordBtn").addEventListener("click", downloadActivityWord);
     document.getElementById("downloadActivityPdfBtn").addEventListener("click", downloadActivityPdf);
     document.getElementById("printActivityBtn").addEventListener("click", printActivityPlan);
@@ -6056,8 +6792,20 @@
         alert("Selecciona curso, asignatura y OA.");
         return;
       }
-      const plan = await generateActivityPlanFromMode(values);
-      renderActivityPlan(plan);
+      const submitButton = activityForm.querySelector('button[type="submit"]');
+      submitButton.disabled = true;
+      submitButton.textContent = "Generando...";
+      showActivityGenerationLoading();
+      try {
+        const plan = await generateActivityPlanFromMode(values);
+        renderActivityPlan(plan);
+      } catch (error) {
+        activityMessage.textContent = "No se pudo generar la planificaci\u00f3n.";
+        activityPreview.innerHTML = `<div class="grade-alert">${escapeHtml(error.message || error)}</div>`;
+      } finally {
+        submitButton.disabled = false;
+        submitButton.textContent = "Generar planificaci\u00f3n";
+      }
     });
     activityCourse.addEventListener("change", () => {
       updateActivitySubjectOptions(activitySubject.value);
@@ -6223,6 +6971,10 @@
       return teacher === adminProfile;
     }
 
+    function isInspectorProfile() {
+      return teacher === inspectorProfile;
+    }
+
     function isMaintenanceItem(item) {
       if (!item) return false;
       const subject = normalize(item.subject);
@@ -6339,14 +7091,55 @@
       return String(value ?? "").replace(/["\\]/g, "\\$&");
     }
 
-    fillMonthSelect();
-    fillActivityOptions();
-    updateDateOptions();
-    updateTimeOptions();
-    renderProfiles();
+    function isQrEntry() {
+      const params = new URLSearchParams(window.location.search);
+      return params.get("qr") === "1" || params.get("acceso") === "qr";
+    }
 
-    const directTeacher = new URLSearchParams(window.location.search).get("profesor");
-    if (directTeacher) openProfile(directTeacher);
+    function enforceQrPasswordGate() {
+      if (!isQrEntry()) return true;
+      try {
+        if (sessionStorage.getItem("unescoQrAccessOk") === "1") return true;
+      } catch {
+        // Si el navegador bloquea sessionStorage, igual pedimos la clave.
+      }
+      const password = prompt("Acceso desde c\u00f3digo QR. Ingresa la contrase\u00f1a para entrar a la plataforma.");
+      if (password === qrAccessPassword) {
+        try { sessionStorage.setItem("unescoQrAccessOk", "1"); } catch {}
+        return true;
+      }
+      document.body.innerHTML = `
+        <section class="home">
+          <header class="brand">
+            ${schoolLogoSvg("logo")}
+            <div class="brand-title">
+              <h1>Escuela Unesco</h1>
+              <p>&ldquo;Educar para la Paz&rdquo;</p>
+            </div>
+          </header>
+          <main>
+            <section class="intro">
+              <div>
+                <h2>Acceso protegido</h2>
+                <p>La contrase\u00f1a ingresada no es correcta. Vuelve a escanear el c\u00f3digo QR o solicita apoyo al encargado.</p>
+              </div>
+            </section>
+          </main>
+        </section>
+      `;
+      return false;
+    }
+
+    if (enforceQrPasswordGate()) {
+      fillMonthSelect();
+      fillActivityOptions();
+      updateDateOptions();
+      updateTimeOptions();
+      renderProfiles();
+
+      const directTeacher = new URLSearchParams(window.location.search).get("profesor");
+      if (directTeacher) openProfile(directTeacher);
+    }
   </script>
 </body>
 </html>
