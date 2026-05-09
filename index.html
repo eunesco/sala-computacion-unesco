@@ -393,9 +393,9 @@
     }
 
     .module-main {
-      padding: 24px 28px 34px;
+      padding: 10px 28px 18px;
       display: grid;
-      gap: 18px;
+      gap: 8px;
       align-content: start;
     }
 
@@ -409,7 +409,7 @@
     .module-hero h2 {
       margin: 0;
       color: var(--blue);
-      font-size: 26px;
+      font-size: 30px;
     }
 
     .module-hero p {
@@ -420,8 +420,8 @@
 
     .module-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 14px;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 8px;
     }
 
     .module-card {
@@ -436,6 +436,30 @@
       text-align: left;
       box-shadow: 0 12px 26px rgba(31, 41, 55, 0.08);
       cursor: pointer;
+    }
+
+    .module-home .module-grid .module-card {
+      min-height: 86px;
+      grid-template-columns: auto 1fr auto;
+      grid-template-rows: auto;
+      align-items: center;
+      padding: 11px;
+    }
+
+    .module-home .module-card .module-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+
+    .module-home .module-card h3 {
+      font-size: 13px;
+    }
+
+    .module-home .module-card p {
+      font-size: 11px;
+      line-height: 1.25;
     }
 
     .module-card:hover {
@@ -481,7 +505,7 @@
     .quick-tools {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 10px;
+      gap: 8px;
     }
 
     .profile-calendar {
@@ -490,6 +514,7 @@
       background: white;
       overflow: hidden;
       box-shadow: 0 12px 26px rgba(31, 41, 55, 0.08);
+      min-height: 64vh;
     }
 
     .profile-calendar-head {
@@ -540,6 +565,7 @@
       border-top: 1px solid #e5edf5;
       padding: 0;
       max-height: none;
+      overflow: visible;
     }
 
     .school-week-head,
@@ -549,6 +575,11 @@
       min-height: 122px;
       padding: 8px;
       background: #fff;
+    }
+
+    .school-month-cell.blank {
+      background: #f8fafc;
+      min-height: 122px;
     }
 
     .school-week-head {
@@ -581,6 +612,7 @@
       background: color-mix(in srgb, var(--tag, var(--blue)) 16%, white);
       font-size: 11px;
       line-height: 1.2;
+      cursor: pointer;
     }
 
     .school-event-suggestions {
@@ -2615,6 +2647,12 @@
           <h2>Configuraci&oacute;n</h2>
           <label for="groupsCourse">Curso</label>
           <select id="groupsCourse"></select>
+          <label for="groupsSubject">Asignatura</label>
+          <select id="groupsSubject"></select>
+          <label for="groupsDate">Fecha</label>
+          <input id="groupsDate" type="date">
+          <label for="groupsSaveName">Nombre de la guardada</label>
+          <input id="groupsSaveName" placeholder="Ej: grupos trabajo con nota">
           <label for="groupSize">Integrantes por grupo</label>
           <select id="groupSize">
             <option value="2">2 integrantes</option>
@@ -2626,6 +2664,8 @@
           <div class="student-checks" id="groupStudentList"></div>
           <div class="actions" style="margin-top:12px;">
             <button class="primary" type="button" id="startGroupsBtn">Comenzar</button>
+            <button type="button" id="singleStudentBtn">Elegir 1 estudiante</button>
+            <button type="button" id="saveGroupsBtn">Guardar grupos</button>
             <button type="button" id="clearGroupsBtn">Limpiar</button>
           </div>
         </aside>
@@ -2634,6 +2674,8 @@
             <div class="notice" style="margin:14px;">Selecciona curso, saca ausentes y presiona comenzar.</div>
           </div>
           <div class="generated-groups" id="generatedGroups"></div>
+          <h3 style="color:var(--blue); margin-top:16px;">Grupos guardados</h3>
+          <div class="generated-groups" id="savedGroupsList"></div>
         </section>
       </section>
     </section>
@@ -2734,6 +2776,20 @@
     </section>
   </div>
 
+  <div class="modal-overlay" id="schoolEventDetailModal" aria-hidden="true">
+    <section class="day-card" role="dialog" aria-modal="true" aria-labelledby="schoolEventDetailTitle">
+      <header>
+        <div>
+          <h2 id="schoolEventDetailTitle">Evento</h2>
+          <div class="count" id="schoolEventDetailMeta"></div>
+        </div>
+        <button class="modal-close" type="button" id="closeSchoolEventDetailModal" aria-label="Cerrar">&times;</button>
+      </header>
+      <div class="day-list" id="schoolEventDetailBody"></div>
+      <button class="primary" type="button" id="hidePersonalEventBtn">Este no es mi evento</button>
+    </section>
+  </div>
+
   <script>
     const teachers = [
       "Betsy Vega",
@@ -2749,11 +2805,15 @@
       "Mayra Jofr\u00e9",
       "Natalia Palma",
       "Paulo Montoya",
+      "Paz Silva",
       "Roc\u00edo Molina",
       "Sol Quintana",
     ];
     const adminProfile = "Administraci\u00f3n - UTP";
     const inspectorProfile = "Inspector\u00eda";
+    const directorProfile = "F\u00e9lix Labb\u00e9";
+    const institutionalProfiles = [adminProfile, directorProfile];
+    const inspectorEventProfiles = [inspectorProfile, "Ruby Mu\u00f1oz"];
     const adminPassword = "unesco";
     const gradebookPassword = "violetit4";
     const qrAccessPassword = "eunesco";
@@ -2766,7 +2826,7 @@
     const allSubjects = ["Lenguaje", "Matem\u00e1tica", "Historia", "Ciencias Naturales", "Ingl\u00e9s", "Artes", "M\u00fasica", "Educaci\u00f3n F\u00edsica", "Orientaci\u00f3n", "Tecnolog\u00eda", "Lengua y Cultura Pueblos Originarios"];
     const coreSubjects = ["Lenguaje", "Matem\u00e1tica", "Historia", "Ciencias Naturales", "Ingl\u00e9s", "Artes", "Orientaci\u00f3n", "Lengua y Cultura Pueblos Originarios"];
     const thirdCore = ["Lenguaje", "Matem\u00e1tica", "Historia", "Ciencias Naturales", "Artes", "Orientaci\u00f3n", "Lengua y Cultura Pueblos Originarios"];
-    const noCalendarTeachers = ["Karina Guerra", "Natalia Palma"];
+    const noCalendarTeachers = ["Karina Guerra", "Natalia Palma", "Paz Silva"];
     const supabaseUrl = "https://pgxtzdimujbmdipdfizv.supabase.co";
     const supabaseKey = "sb_publishable_RcMV42tQzdf1oZzkQwUOwQ_UWyNTRg-";
     const supabaseTable = "solicitudes_sala";
@@ -2799,7 +2859,7 @@
     const courseHeadTeachers = {
       "1\u00b0 B\u00e1sico": "Javiera Ossandon",
       "2\u00b0 B\u00e1sico": "Jazm\u00edn Estefan\u00eda",
-      "3\u00b0 B\u00e1sico": "Marisol",
+      "3\u00b0 B\u00e1sico": "Sol Quintana",
       "4\u00b0 B\u00e1sico": "Betsy Vega",
       "5\u00b0 B\u00e1sico": "Cristian Lepe",
       "6\u00b0 B\u00e1sico": "Jos\u00e9 \u00c1lvarez",
@@ -2809,10 +2869,11 @@
     const schoolEventGroups = {
       "Todos": ["Todos"],
       "Todos los docentes": ["Todos los docentes"],
-      "Equipo de gesti\u00f3n": ["Equipo de gesti\u00f3n"],
-      "Equipo directivo": ["Equipo directivo"],
-      "Equipo PIE": ["Equipo PIE"],
+      "Equipo de gesti\u00f3n": [directorProfile, adminProfile, inspectorProfile],
+      "Equipo directivo": [adminProfile, directorProfile, inspectorProfile, "Paz Silva"],
+      "Equipo PIE": ["Daniela Gonz\u00e1lez", "Paz Silva", "Maribel Far\u00edas", "Ninoska", "Valeska", "Mar\u00eda Paz"],
       "Pre b\u00e1sica": ["Pre k\u00ednder", "K\u00ednder"],
+      "Responsables CRA": ["Sonia", "Mar\u00eda Teresa"],
       "Asistentes de la educaci\u00f3n": ["Asistentes de la educaci\u00f3n"],
       "Profesoras/es jefe": Object.values(courseHeadTeachers),
     };
@@ -3955,6 +4016,8 @@
     let schoolEvents = [];
     let schoolEventScope = "mine";
     let schoolEventView = "list";
+    let selectedSchoolEventId = "";
+    let currentGeneratedGroups = [];
     let savedActivityPlans = [];
     let currentActivityPlan = null;
     let currentActivityRating = 0;
@@ -4040,19 +4103,28 @@
     const schoolEventModal = document.getElementById("schoolEventModal");
     const schoolEventForm = document.getElementById("schoolEventForm");
     const schoolEventCategory = document.getElementById("schoolEventCategory");
+    const schoolEventDetailModal = document.getElementById("schoolEventDetailModal");
+    const schoolEventDetailTitle = document.getElementById("schoolEventDetailTitle");
+    const schoolEventDetailMeta = document.getElementById("schoolEventDetailMeta");
+    const schoolEventDetailBody = document.getElementById("schoolEventDetailBody");
+    const hidePersonalEventBtn = document.getElementById("hidePersonalEventBtn");
     const groupsProfileName = document.getElementById("groupsProfileName");
     const groupsCourse = document.getElementById("groupsCourse");
+    const groupsSubject = document.getElementById("groupsSubject");
+    const groupsDate = document.getElementById("groupsDate");
+    const groupsSaveName = document.getElementById("groupsSaveName");
     const groupSize = document.getElementById("groupSize");
     const groupStudentList = document.getElementById("groupStudentList");
     const groupAnimation = document.getElementById("groupAnimation");
     const generatedGroups = document.getElementById("generatedGroups");
+    const savedGroupsList = document.getElementById("savedGroupsList");
 
     function renderProfiles(filter = "") {
       const term = normalize(filter);
-      const profiles = [adminProfile, inspectorProfile, ...teachers];
+      const profiles = [adminProfile, directorProfile, inspectorProfile, ...teachers];
       const visibleTeachers = profiles.filter(name => normalize(name).includes(term));
       grid.innerHTML = visibleTeachers.map(name => {
-        const isAdmin = name === adminProfile;
+        const isAdmin = institutionalProfiles.includes(name);
         const isInspector = name === inspectorProfile;
         const initials = name.split(" ").map(part => part[0]).join("").slice(0, 2).toUpperCase();
         return `
@@ -4069,8 +4141,8 @@
     }
 
     window.openProfile = function(name) {
-      if (name === adminProfile) {
-        const password = prompt("Ingresa la contrase\u00f1a de Administraci\u00f3n - UTP");
+      if (institutionalProfiles.includes(name)) {
+        const password = prompt(`Ingresa la contrase\u00f1a de ${name}`);
         if (password !== adminPassword) {
           alert("Contrase\u00f1a incorrecta.");
           return;
@@ -4087,15 +4159,15 @@
       profileName.textContent = teacher;
       activityProfileName.textContent = teacher;
       gradebookProfileName.textContent = teacher;
-      moduleChooserTitle.textContent = isAdminProfile() ? "Panel Administraci\u00f3n - UTP" : (isInspectorProfile() ? "Panel Inspector\u00eda" : teacher);
+      moduleChooserTitle.textContent = isAdminProfile() ? `Panel institucional - ${teacher}` : (isInspectorProfile() ? "Panel Inspector\u00eda" : teacher);
       moduleChooserSubtitle.textContent = isAdminProfile() || isInspectorProfile()
         ? "Selecciona el m\u00f3dulo institucional que deseas revisar."
         : "Selecciona el m\u00f3dulo que usar\u00e1s.";
       document.getElementById("openRoomModule").classList.toggle("hidden", isInspectorProfile());
       document.getElementById("openActivityModule").classList.toggle("hidden", isInspectorProfile());
       document.getElementById("newSchoolEventBtn").classList.toggle("hidden", !isAdminProfile());
-      schoolEventScope = "mine";
-      schoolEventView = "list";
+      schoolEventScope = "all";
+      schoolEventView = "month";
       fillSchoolEventCategoryOptions();
       renderColorGuide();
       renderProfileCalendar();
@@ -4206,6 +4278,7 @@
       document.getElementById("eventMonthViewBtn").classList.toggle("active", schoolEventView === "month");
       const items = schoolEvents
         .filter(event => schoolEventScope === "all" || eventBelongsToProfile(event, teacher))
+        .filter(event => schoolEventScope === "all" || !isSchoolEventHiddenForProfile(event.id))
         .filter(event => schoolEventView === "list" ? new Date(`${event.date}T00:00:00`) >= startOfToday() : true);
       profileCalendarSubtitle.textContent = schoolEventScope === "all"
         ? "Vista con todos los eventos institucionales pr\u00f3ximos."
@@ -4229,28 +4302,42 @@
 
     function renderSchoolEventGrid(items, mode) {
       const today = startOfToday();
-      const start = new Date(today);
-      start.setDate(today.getDate() - ((today.getDay() + 6) % 7));
-      const end = new Date(start);
-      end.setDate(start.getDate() + (mode === "week" ? 4 : 34));
       const days = [];
-      for (const cursor = new Date(start); cursor <= end; cursor.setDate(cursor.getDate() + 1)) {
-        if (cursor.getDay() === 0 || cursor.getDay() === 6) continue;
-        days.push(new Date(cursor));
+      if (mode === "week") {
+        const start = new Date(today);
+        start.setDate(today.getDate() - ((today.getDay() + 6) % 7));
+        const end = new Date(start);
+        end.setDate(start.getDate() + 4);
+        for (const cursor = new Date(start); cursor <= end; cursor.setDate(cursor.getDate() + 1)) {
+          days.push(new Date(cursor));
+        }
+      } else {
+        const year = today.getFullYear();
+        const month = today.getMonth();
+        const first = new Date(year, month, 1);
+        const last = new Date(year, month + 1, 0);
+        const leading = (first.getDay() + 6) % 7;
+        for (let index = 0; index < leading && index < 5; index++) days.push(null);
+        for (let day = 1; day <= last.getDate(); day++) {
+          const current = new Date(year, month, day);
+          if (current.getDay() !== 0 && current.getDay() !== 6) days.push(current);
+        }
       }
       const headers = ["Lun", "Mar", "Mi\u00e9", "Jue", "Vie"].map(day => `<div class="school-week-head">${day}</div>`).join("");
       const cells = days.map(day => {
+        if (!day) return `<div class="school-month-cell blank"></div>`;
         const date = `${String(day.getDate()).padStart(2, "0")}-${String(day.getMonth() + 1).padStart(2, "0")}-${day.getFullYear()}`;
         const iso = `${day.getFullYear()}-${String(day.getMonth() + 1).padStart(2, "0")}-${String(day.getDate()).padStart(2, "0")}`;
         const dayItems = items
           .filter(event => event.date === iso)
           .sort((a, b) => String(a.start).localeCompare(String(b.start)));
+        const addClick = isAdminProfile() ? ` onclick="openSchoolEventModal('${iso}')"` : "";
         return `
-          <div class="school-month-cell ${sameLocalDate(day, today) ? "today" : ""}">
+          <div class="school-month-cell ${sameLocalDate(day, today) ? "today" : ""}"${addClick}>
             <div class="school-month-day">${day.getDate()} <span>${monthNames[day.getMonth()].slice(0, 3)}</span></div>
             ${dayItems.map(event => {
               const color = colorForSchoolEvent(event.category);
-              return `<div class="school-month-event" style="--tag:${color}"><strong>${escapeHtml(event.start || "")}</strong> ${escapeHtml(event.title)}</div>`;
+              return `<div class="school-month-event" style="--tag:${color}" onclick="event.stopPropagation(); openSchoolEventDetail('${escapeJs(event.id)}')"><strong>${escapeHtml(event.start || "")}</strong> ${escapeHtml(event.title)}</div>`;
             }).join("")}
           </div>
         `;
@@ -4270,6 +4357,16 @@
     function eventBelongsToProfile(event, name) {
       if (!name) return false;
       if (isAdminProfile() || isInspectorProfile()) return true;
+      if (normalize(event.category).includes("apoderad")) {
+        const profile = normalize(name);
+        if ([...institutionalProfiles, ...inspectorEventProfiles].map(normalize).includes(profile)) return true;
+        const eventPeople = [
+          ...event.participants,
+          ...event.teachers,
+          ...event.courses.map(course => courseHeadTeachers[course] || ""),
+        ].map(normalize);
+        return eventPeople.includes(profile) && !eventPeople.includes("todos");
+      }
       const terms = [
         ...event.participants,
         ...event.teachers,
@@ -4290,7 +4387,7 @@
       const time = [event.start, event.end].filter(Boolean).join(" - ");
       const people = [...new Set([...(event.participants || []), ...(event.courses || []), ...(event.teachers || [])])].filter(Boolean).join(", ");
       return `
-        <article class="school-event" style="--tag:${color}">
+        <article class="school-event" style="--tag:${color}" onclick="openSchoolEventDetail('${escapeJs(event.id)}')">
           <div class="school-event-date">
             ${formatSchoolEventDay(event.date)}
             <span>${escapeHtml(formatSchoolEventMonth(event.date))}</span>
@@ -4354,16 +4451,69 @@
       colorGuideModal.setAttribute("aria-hidden", "true");
     }
 
-    function openSchoolEventModal() {
+    function openSchoolEventModal(date = "") {
       if (!isAdminProfile()) return;
       schoolEventModal.classList.add("active");
       schoolEventModal.setAttribute("aria-hidden", "false");
-      document.getElementById("schoolEventDate").value = new Date().toISOString().slice(0, 10);
+      document.getElementById("schoolEventDate").value = date || new Date().toISOString().slice(0, 10);
     }
 
     function closeSchoolEventModal() {
       schoolEventModal.classList.remove("active");
       schoolEventModal.setAttribute("aria-hidden", "true");
+    }
+
+    window.openSchoolEventDetail = function(id) {
+      const event = schoolEvents.find(item => item.id === id);
+      if (!event) return;
+      selectedSchoolEventId = id;
+      const color = colorForSchoolEvent(event.category);
+      const time = [event.start, event.end].filter(Boolean).join(" - ");
+      const people = [...new Set([...(event.participants || []), ...(event.courses || []), ...(event.teachers || [])])].filter(Boolean).join(", ");
+      schoolEventDetailTitle.textContent = event.title;
+      schoolEventDetailMeta.innerHTML = `<span class="tag-pill" style="--tag:${color}"><span class="tag-dot"></span>${escapeHtml(event.category)}</span>`;
+      schoolEventDetailBody.innerHTML = `
+        <div class="request-pill">
+          <strong>${escapeHtml(formatSchoolEventDay(event.date))} ${escapeHtml(formatSchoolEventMonth(event.date))}</strong>
+          ${time ? `<br>${escapeHtml(time)}` : ""}<br>
+          ${escapeHtml(event.place || "Escuela")}
+          ${people ? `<br>Participan: ${escapeHtml(people)}` : ""}
+          ${event.description ? `<br>${escapeHtml(event.description)}` : ""}
+        </div>
+      `;
+      hidePersonalEventBtn.classList.toggle("hidden", schoolEventScope !== "mine" || isAdminProfile() || isInspectorProfile());
+      schoolEventDetailModal.classList.add("active");
+      schoolEventDetailModal.setAttribute("aria-hidden", "false");
+    };
+
+    function closeSchoolEventDetailModal() {
+      schoolEventDetailModal.classList.remove("active");
+      schoolEventDetailModal.setAttribute("aria-hidden", "true");
+    }
+
+    function hiddenSchoolEventKey() {
+      return `hiddenSchoolEvents:${teacher}`;
+    }
+
+    function hiddenSchoolEventIds() {
+      try {
+        return JSON.parse(localStorage.getItem(hiddenSchoolEventKey()) || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function isSchoolEventHiddenForProfile(id) {
+      return hiddenSchoolEventIds().includes(id);
+    }
+
+    function hideSelectedSchoolEventForProfile() {
+      if (!selectedSchoolEventId) return;
+      const ids = hiddenSchoolEventIds();
+      if (!ids.includes(selectedSchoolEventId)) ids.push(selectedSchoolEventId);
+      localStorage.setItem(hiddenSchoolEventKey(), JSON.stringify(ids));
+      closeSchoolEventDetailModal();
+      renderProfileCalendar();
     }
 
     function fillSchoolEventCategoryOptions() {
@@ -4373,6 +4523,8 @@
       const suggestions = [...new Set([
         ...Object.keys(schoolEventGroups),
         ...teachers,
+        ...institutionalProfiles,
+        ...inspectorEventProfiles,
         ...courses,
         ...Object.values(courseHeadTeachers),
       ])].filter(Boolean);
@@ -7120,14 +7272,30 @@
       randomGroupsView.classList.remove("hidden");
       groupsProfileName.textContent = teacher;
       if (!gradebookStudents.length) await loadGradebookData();
+      const loadedCourses = [...new Set(gradebookStudents.map(student => student.course))]
+        .filter(course => gradeFromCourse(course) >= 1)
+        .sort((a, b) => gradeFromCourse(a) - gradeFromCourse(b));
+      const assignedCourses = coursesForTeacher(teacher).filter(course => gradeFromCourse(course) >= 1);
       const available = isAdminProfile() || isInspectorProfile()
-        ? courses.filter(course => gradeFromCourse(course) >= 1)
-        : coursesForTeacher(teacher).filter(course => gradeFromCourse(course) >= 1);
+        ? loadedCourses
+        : loadedCourses.filter(course => assignedCourses.includes(course));
       fillSelect(groupsCourse, available, "Selecciona curso");
       groupsCourse.value = available[0] || "";
+      groupsDate.value = new Date().toISOString().slice(0, 10);
+      updateGroupSubjectOptions();
       renderGroupStudentList();
+      renderSavedGroupsList();
       generatedGroups.innerHTML = "";
+      currentGeneratedGroups = [];
       groupAnimation.innerHTML = `<div class="notice" style="margin:14px;">Selecciona curso, saca ausentes y presiona comenzar.</div>`;
+    }
+
+    function updateGroupSubjectOptions() {
+      const subjects = isAdminProfile() || isInspectorProfile()
+        ? allSubjects
+        : subjectsForTeacherCourse(teacher, groupsCourse.value).filter(subject => subject !== "Mantenci\u00f3n");
+      fillSelect(groupsSubject, subjects, subjects.length ? "Selecciona asignatura" : "Sin asignaturas");
+      groupsSubject.value = subjects[0] || "";
     }
 
     function renderGroupStudentList() {
@@ -7160,6 +7328,10 @@
         groups.push(shuffled.slice(index, index + size));
       }
       setTimeout(() => {
+        currentGeneratedGroups = groups.map(group => group.map(student => ({
+          id: student.id,
+          name: studentFullName(student),
+        })));
         generatedGroups.innerHTML = groups.map((group, index) => `
           <article class="group-card">
             <h3>Grupo ${index + 1}</h3>
@@ -7167,6 +7339,72 @@
           </article>
         `).join("");
       }, 1500);
+    }
+
+    function chooseSingleRandomStudent() {
+      const selectedIds = [...groupStudentList.querySelectorAll("input[data-group-student]:checked")].map(input => input.dataset.groupStudent);
+      const students = selectedIds
+        .map(id => gradebookStudents.find(student => student.id === id))
+        .filter(Boolean);
+      if (!students.length) {
+        alert("Selecciona al menos un estudiante.");
+        return;
+      }
+      const chosen = students[Math.floor(Math.random() * students.length)];
+      animateGroupFormation(students);
+      currentGeneratedGroups = [[{ id: chosen.id, name: studentFullName(chosen) }]];
+      setTimeout(() => {
+        generatedGroups.innerHTML = `
+          <article class="group-card">
+            <h3>Estudiante elegido</h3>
+            <div>${escapeHtml(studentFullName(chosen))}</div>
+          </article>
+        `;
+      }, 1100);
+    }
+
+    function savedGroupsKey() {
+      return `savedRandomGroups:${teacher}`;
+    }
+
+    function readSavedGroups() {
+      try {
+        return JSON.parse(localStorage.getItem(savedGroupsKey()) || "[]");
+      } catch {
+        return [];
+      }
+    }
+
+    function saveCurrentGroups() {
+      if (!currentGeneratedGroups.length) {
+        alert("Primero genera grupos o elige un estudiante.");
+        return;
+      }
+      const saved = readSavedGroups();
+      saved.unshift({
+        id: `groups-${Date.now()}`,
+        name: groupsSaveName.value.trim() || "Grupos guardados",
+        date: groupsDate.value,
+        course: groupsCourse.value,
+        subject: groupsSubject.value,
+        groups: currentGeneratedGroups,
+      });
+      localStorage.setItem(savedGroupsKey(), JSON.stringify(saved.slice(0, 30)));
+      renderSavedGroupsList();
+      alert("Grupos guardados en este perfil.");
+    }
+
+    function renderSavedGroupsList() {
+      const saved = readSavedGroups();
+      savedGroupsList.innerHTML = saved.length ? saved.slice(0, 6).map(item => `
+        <article class="group-card">
+          <h3>${escapeHtml(item.name)}</h3>
+          <div class="saved-meta">${escapeHtml(item.date || "")} | ${escapeHtml(item.course || "")} | ${escapeHtml(item.subject || "")}</div>
+          ${item.groups.map((group, index) => `
+            <div style="margin-top:7px;"><strong>${item.groups.length === 1 && group.length === 1 ? "Elegido" : `Grupo ${index + 1}`}</strong>: ${group.map(student => escapeHtml(student.name)).join(", ")}</div>
+          `).join("")}
+        </article>
+      `).join("") : `<div class="notice">A&uacute;n no hay grupos guardados en este perfil.</div>`;
     }
 
     function animateGroupFormation(students) {
@@ -7259,6 +7497,11 @@
     schoolEventModal.addEventListener("click", event => {
       if (event.target === schoolEventModal) closeSchoolEventModal();
     });
+    document.getElementById("closeSchoolEventDetailModal").addEventListener("click", closeSchoolEventDetailModal);
+    hidePersonalEventBtn.addEventListener("click", hideSelectedSchoolEventForProfile);
+    schoolEventDetailModal.addEventListener("click", event => {
+      if (event.target === schoolEventDetailModal) closeSchoolEventDetailModal();
+    });
     document.getElementById("backToModulesFromGrades").addEventListener("click", openModuleChooser);
     document.getElementById("closeGradeImportModal").addEventListener("click", closeGradeImportModal);
     document.getElementById("cancelGradeImportBtn").addEventListener("click", closeGradeImportModal);
@@ -7272,12 +7515,18 @@
     document.getElementById("openRandomGroupsBtn").addEventListener("click", openRandomGroupsModule);
     document.getElementById("backToModulesFromGroups").addEventListener("click", openModuleChooser);
     document.getElementById("startGroupsBtn").addEventListener("click", startRandomGroups);
+    document.getElementById("singleStudentBtn").addEventListener("click", chooseSingleRandomStudent);
+    document.getElementById("saveGroupsBtn").addEventListener("click", saveCurrentGroups);
     document.getElementById("clearGroupsBtn").addEventListener("click", () => {
       generatedGroups.innerHTML = "";
+      currentGeneratedGroups = [];
       renderGroupStudentList();
       groupAnimation.innerHTML = `<div class="notice" style="margin:14px;">Selecciona curso, saca ausentes y presiona comenzar.</div>`;
     });
-    groupsCourse.addEventListener("change", renderGroupStudentList);
+    groupsCourse.addEventListener("change", () => {
+      updateGroupSubjectOptions();
+      renderGroupStudentList();
+    });
     document.getElementById("backToCalendarBtn").addEventListener("click", closeActivityModule);
     document.getElementById("saveActivityBtn").addEventListener("click", saveActivityPlan);
     document.getElementById("sendActivityFeedbackBtn").addEventListener("click", sendActivityFeedback);
@@ -7477,11 +7726,11 @@
     }
 
     function isAdminProfile() {
-      return teacher === adminProfile;
+      return institutionalProfiles.includes(teacher);
     }
 
     function isInspectorProfile() {
-      return teacher === inspectorProfile;
+      return teacher === inspectorProfile || inspectorEventProfiles.includes(teacher);
     }
 
     function isMaintenanceItem(item) {
