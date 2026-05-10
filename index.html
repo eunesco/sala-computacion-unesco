@@ -4179,12 +4179,11 @@
     };
 
     function openModuleChooser() {
-      homeView.classList.add("hidden");
-      appView.classList.add("hidden");
-      activityView.classList.add("hidden");
-      gradebookView.classList.add("hidden");
-      randomGroupsView.classList.add("hidden");
-      moduleChooserView.classList.remove("hidden");
+      if (teacher) {
+        openRoomModule("computacion");
+        return;
+      }
+      backToProfileSelector();
     }
 
     function backToProfileSelector() {
