@@ -2259,7 +2259,7 @@
       <section class="intro">
         <div>
           <h2>Plataforma docente Escuela Unesco</h2>
-          <p>Selecciona tu perfil para ingresar a los m&oacute;dulos disponibles.</p>
+          <p>Selecciona tu perfil para solicitar hora en la sala de computaci&oacute;n.</p>
         </div>
         <input class="search" id="search" type="search" placeholder="Buscar profesor/a">
       </section>
@@ -2381,7 +2381,7 @@
           <div class="school-name">Escuela Unesco</div>
           <div class="school-motto">&ldquo;Educar para la Paz&rdquo;</div>
         </div>
-        <button class="module-button" type="button" id="openActivityModule">Generador de actividades sala de computaci&oacute;n</button>
+        <button class="module-button hidden" type="button" id="openActivityModule">Generador de actividades sala de computaci&oacute;n</button>
         <div class="profile-name">
           <div id="profileName">Perfil docente</div>
           <button class="back" type="button" id="backBtn">Cambiar perfil</button>
@@ -4164,7 +4164,7 @@
         ? "Selecciona el m\u00f3dulo institucional que deseas revisar."
         : "Selecciona el m\u00f3dulo que usar\u00e1s.";
       document.getElementById("openRoomModule").classList.toggle("hidden", isInspectorProfile());
-      document.getElementById("openActivityModule").classList.toggle("hidden", isInspectorProfile());
+      document.getElementById("openActivityModule").classList.add("hidden");
       document.getElementById("newSchoolEventBtn").classList.toggle("hidden", !isAdminProfile());
       schoolEventScope = "all";
       schoolEventView = "month";
@@ -4175,6 +4175,7 @@
       showColorGuideOnProfileEntry();
       resetForm();
       appView.classList.toggle("admin-mode", isAdminProfile());
+      openRoomModule("computacion");
     };
 
     function openModuleChooser() {
@@ -7608,7 +7609,7 @@
     document.getElementById("backBtn").addEventListener("click", () => {
       appView.classList.add("hidden");
       appView.classList.remove("admin-mode", "stats-mode");
-      openModuleChooser();
+      backToProfileSelector();
     });
     courseSelect.addEventListener("change", () => updateSubjectOptions());
     subjectSelect.addEventListener("change", updateMaintenanceMode);
